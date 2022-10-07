@@ -1,7 +1,8 @@
 package controller;
 
-import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
 
 public class AppointmentList {
-
+    public void onActionToCustomer(ActionEvent actionEvent) {
+    }
 }
