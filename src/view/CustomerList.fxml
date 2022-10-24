@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.CustomerList"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerList">
+   <children>
+       <ButtonBar layoutX="2.0" layoutY="54.0" prefHeight="40.0" prefWidth="992.0">
+           <buttons>
+               <Button mnemonicParsing="false" onAction="#onActionToCustomer" text="Customers" />
+               <Button layoutX="472.0" layoutY="18.0" mnemonicParsing="false" onAction="#onActionToReport" text="Reports" />
+               <Button layoutX="472.0" layoutY="18.0" mnemonicParsing="false" onAction="#onActionExit" text="Exit Scheduler" />
+               <TextField fx:id="apptSearch" prefWidth="252.0" promptText="Search" />
+           </buttons>
+           <opaqueInsets>
+               <Insets />
+           </opaqueInsets>
+           <effect>
+               <DropShadow blurType="TWO_PASS_BOX" />
+           </effect>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="15.0" top="5.0" />
+         </padding>
+       </ButtonBar>
+      <TableView layoutX="29.0" layoutY="107.0" prefHeight="251.0" prefWidth="952.0">
+        <columns>
+          <TableColumn prefWidth="55.0" text="ID" />
+          <TableColumn prefWidth="234.0" text="Name" />
+            <TableColumn prefWidth="235.0" text="Address" />
+            <TableColumn prefWidth="77.0" text="Postal Code" />
+            <TableColumn prefWidth="136.0" text="Phone" />
+            <TableColumn prefWidth="111.0" text="Country" />
+            <TableColumn prefWidth="103.0" text="Division" />
+        </columns>
+      </TableView>
+      <Button layoutX="29.0" layoutY="363.0" mnemonicParsing="false" text="Delete Customer" />
+      <Button layoutX="157.0" layoutY="363.0" mnemonicParsing="false" text="Modify Customer" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="428.0" layoutY="19.0" text="Customer List">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
