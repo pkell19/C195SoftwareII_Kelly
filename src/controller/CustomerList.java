@@ -8,4 +8,7 @@ public class CustomerList {
 
     public void onActionToReport(ActionEvent actionEvent) {
     }
+
+    public void onActionExit(ActionEvent actionEvent) {
+    }
 }
