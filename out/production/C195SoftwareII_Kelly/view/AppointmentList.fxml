@@ -60,18 +60,18 @@
          </Button>
       </children>
    </HBox>
-   <ButtonBar layoutX="13.0" layoutY="54.0" prefHeight="40.0" prefWidth="967.0">
-     <buttons>
-       <Button mnemonicParsing="false" onAction="#onActionToCustomer" text="Customers" />
-         <Button layoutX="472.0" layoutY="18.0" mnemonicParsing="false" onAction="#onActionToReport" text="Reports" />
-         <Button layoutX="472.0" layoutY="18.0" mnemonicParsing="false" onAction="#onActionExit" text="Exit Scheduler" />
-         <TextArea fx:id="apptSearch" prefHeight="40.0" prefWidth="252.0" promptText="Search" />
-     </buttons>
-      <opaqueInsets>
-         <Insets />
-      </opaqueInsets>
-      <effect>
-         <DropShadow blurType="TWO_PASS_BOX" />
-      </effect>
-   </ButtonBar>
+    <ButtonBar layoutX="13.0" layoutY="54.0" prefHeight="40.0" prefWidth="967.0">
+        <buttons>
+            <Button mnemonicParsing="false" onAction="#onActionToCustomer" text="Customers" />
+            <Button layoutX="472.0" layoutY="18.0" mnemonicParsing="false" onAction="#onActionToReport" text="Reports" />
+            <Button layoutX="472.0" layoutY="18.0" mnemonicParsing="false" onAction="#onActionExit" text="Exit Scheduler" />
+            <TextField fx:id="apptSearch" prefWidth="252.0" promptText="Search" />
+        </buttons>
+        <opaqueInsets>
+            <Insets />
+        </opaqueInsets>
+        <effect>
+            <DropShadow blurType="TWO_PASS_BOX" />
+        </effect>
+    </ButtonBar>
 </AnchorPane>
