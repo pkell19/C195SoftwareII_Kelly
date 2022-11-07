@@ -27,4 +27,10 @@ public class NewCustomer {
 
     public void onActNoSaveCustList(ActionEvent actionEvent) {
     }
+
+    public void onActionToMainMenu(ActionEvent actionEvent) {
+    }
+
+    public void onActionToAppt(ActionEvent actionEvent) {
+    }
 }

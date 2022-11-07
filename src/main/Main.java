@@ -1,5 +1,7 @@
 package main;
-
+/**
+ * @author Patty Kelly
+ */
 import dao.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,19 +9,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("LoginActivity.fxml"));
-        primaryStage.setTitle("Log In");
-        primaryStage.setScene(new Scene(root, 400, 600));
-        primaryStage.show();
+    public void start(Stage stage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginActivity.fxml"));
+        stage.setTitle("Log In");
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
     }
 
-
     public static void main(String[] args) {
-        JDBC.openConnection();
+        //JDBC.openConnection();
         launch(args);
     }
 }
