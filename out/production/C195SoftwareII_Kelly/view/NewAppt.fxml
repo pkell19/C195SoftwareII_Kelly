@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewAppt">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewAppt">
     <ButtonBar buttonMinWidth="120.0" layoutX="158.0" layoutY="65.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
         <buttons>
             <Button mnemonicParsing="false" onAction="#onActionToMainMenu" text="Main Menu" />

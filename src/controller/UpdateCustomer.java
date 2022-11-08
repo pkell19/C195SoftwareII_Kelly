@@ -3,6 +3,8 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class UpdateCustomer {
     public TextField updateCustomerName;
     public TextField updateAddress;
@@ -11,20 +13,30 @@ public class UpdateCustomer {
     public TextField updateCountry;
     public TextField updateDivision;
     public TextField customerID;
-    public TextField apptSearch;
 
-    public void onActSaveCustList(ActionEvent actionEvent) {
+    public void onActSaveCustList(ActionEvent actionEvent) throws IOException {
+        //TODO: Add save to customer list
+        SceneMovements.goToCustomerList(actionEvent);
     }
 
-    public void onActNoSaveCustList(ActionEvent actionEvent) {
+    public void onActNoSaveCustList(ActionEvent actionEvent) throws IOException {
+        //TODO: Add alert stating customer data not saved
+        SceneMovements.goToCustomerList(actionEvent);
     }
 
-    public void onActionToCustomer(ActionEvent actionEvent) {
+    public void onActionToCustomer(ActionEvent actionEvent) throws IOException {
+        SceneMovements.goToCustomerList(actionEvent);
     }
 
-    public void onActionToReport(ActionEvent actionEvent) {
+    public void onActionToReport(ActionEvent actionEvent) throws IOException {
+        SceneMovements.goToReportPage(actionEvent);
     }
 
-    public void onActionExit(ActionEvent actionEvent) {
+    public void onActionToMainMenu(ActionEvent actionEvent) throws IOException {
+        SceneMovements.goToMainMenu(actionEvent);
+    }
+
+    public void onActionToAppt(ActionEvent actionEvent) throws IOException {
+        SceneMovements.goToApptList(actionEvent);
     }
 }

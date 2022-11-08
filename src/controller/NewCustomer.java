@@ -3,6 +3,8 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class NewCustomer {
     public TextField newCustomerName;
     public TextField newAddress;
@@ -11,26 +13,30 @@ public class NewCustomer {
     public TextField newCountry;
     public TextField newDivision;
     public TextField newCustomerID;
-    public TextField apptSearch;
 
-    public void onActionToCustomer(ActionEvent actionEvent) {
+    public void onActionToCustomer(ActionEvent actionEvent) throws IOException {
+        SceneMovements.goToCustomerList(actionEvent);
     }
 
-    public void onActionToReport(ActionEvent actionEvent) {
+    public void onActionToReport(ActionEvent actionEvent) throws IOException {
+        SceneMovements.goToReportPage(actionEvent);
     }
 
-    public void onActionExit(ActionEvent actionEvent) {
+    public void onActSaveCustList(ActionEvent actionEvent) throws IOException {
+        //TODO: Add coding to save to customer list
+        SceneMovements.goToCustomerList(actionEvent);
     }
 
-    public void onActSaveCustList(ActionEvent actionEvent) {
+    public void onActNoSaveCustList(ActionEvent actionEvent) throws IOException {
+        //TODO: Add alert stating customer was not saved.
+        SceneMovements.goToCustomerList(actionEvent);
     }
 
-    public void onActNoSaveCustList(ActionEvent actionEvent) {
+    public void onActionToMainMenu(ActionEvent actionEvent) throws IOException {
+        SceneMovements.goToMainMenu(actionEvent);
     }
 
-    public void onActionToMainMenu(ActionEvent actionEvent) {
-    }
-
-    public void onActionToAppt(ActionEvent actionEvent) {
+    public void onActionToAppt(ActionEvent actionEvent) throws IOException {
+        SceneMovements.goToApptList(actionEvent);
     }
 }
