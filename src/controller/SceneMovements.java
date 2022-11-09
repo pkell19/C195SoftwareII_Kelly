@@ -68,7 +68,7 @@ public class SceneMovements {
     public static void goToUpdateAppt(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(SceneMovements.class.getResource("/view/UpdateAppt.fxml")));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 600, 550);
         stage.setTitle("Update Appointment");
         stage.setScene(scene);
         stage.show();
@@ -77,7 +77,7 @@ public class SceneMovements {
     public static void goToNewAppt(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(SceneMovements.class.getResource("/view/NewAppt.fxml")));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 600, 550);
         stage.setTitle("New Appointment");
         stage.setScene(scene);
         stage.show();

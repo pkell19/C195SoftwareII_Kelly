@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.effect.DropShadow?>
 <AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateCustomer">
     <GridPane layoutX="150.0" layoutY="115.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="115.0">
         <columnConstraints>
@@ -57,18 +58,27 @@
             <Insets left="20.0" right="20.0" />
         </padding>
     </HBox>
-   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="250.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="50.0">
-      <children>
-          <Button mnemonicParsing="false" onAction="#onActSaveCustList" prefWidth="100.0" style="-fx-background-color: #36454f;" text="Save" textAlignment="CENTER" textFill="#fcf9f9">
-              <font>
-                  <Font name="Arial" size="14.0" />
-              </font>
-         </Button>
-          <Button mnemonicParsing="false" onAction="#onActNoSaveCustList" prefWidth="100.0" style="-fx-background-color: #36454f;" text="Cancel" textAlignment="CENTER" textFill="#fcf9f9">
-              <font>
-                  <Font name="Arial" size="14.0" />
-              </font>
-         </Button>
-      </children>
-   </HBox>
+    <ButtonBar buttonMinWidth="100.0" prefWidth="250.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="50.0">
+        <buttons>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onActSaveCustList" style="-fx-background-color: #36454f;" text="Save" textFill="#f5f5f5">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#onActNoSaveCustList" style="-fx-background-color: #36454f;" text="Cancel" textFill="#f5f5f5">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font>
+            </Button>
+        </buttons>
+        <opaqueInsets>
+            <Insets />
+        </opaqueInsets>
+        <effect>
+            <DropShadow blurType="TWO_PASS_BOX" />
+        </effect>
+        <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </padding>
+    </ButtonBar>
 </AnchorPane>

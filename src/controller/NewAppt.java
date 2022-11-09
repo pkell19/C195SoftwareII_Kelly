@@ -1,23 +1,26 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
 public class NewAppt {
-    public TextField newApptCustomer;
-    public TextField newDate;
-    public TextField newStartTime;
-    public TextField newEndTime;
+
+
     public TextField newTitle;
     public TextField newDescription;
-    public TextField newLocation;
     public TextArea newApptType;
-    public TextField newUser;
-    public TextField newApptContact;
+    public ComboBox newCustomer;
+    public DatePicker newDate;
+    public ComboBox newStartTime;
+    public ComboBox newEndTime;
     public TextField newApptId;
+    public ComboBox newUser;
+    public ComboBox newApptContact;
 
     public void onActionToMainMenu(ActionEvent actionEvent) throws IOException {
         SceneMovements.goToMainMenu(actionEvent);
@@ -41,12 +44,4 @@ public class NewAppt {
     public void cancelNewAppt(ActionEvent actionEvent) {
     }
 
-    public void openCalendar(ActionEvent actionEvent) {
-    }
-
-    public void openTimeDropDown(ActionEvent actionEvent) {
-    }
-
-    public void openCustDropDown(ActionEvent actionEvent) {
-    }
 }

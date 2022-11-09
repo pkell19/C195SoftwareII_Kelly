@@ -44,7 +44,8 @@ public class AppointmentList {
         SceneMovements.goToNewAppt(actionEvent);
     }
 
-    public void deleteAppt(ActionEvent actionEvent) {
-        System.out.println("CREATE DELETE APPT");
+    public void deleteAppt(ActionEvent actionEvent) throws IOException {
+        //TODO: Create delete appt method.
+        SceneMovements.goToApptList(actionEvent);
     }
 }

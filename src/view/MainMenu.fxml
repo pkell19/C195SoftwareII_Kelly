@@ -15,7 +15,7 @@
             <Font name="Ebrima Bold" size="36.0" />
          </font>
       </Label>
-      <VBox alignment="CENTER" layoutX="289.0" layoutY="100.0" prefHeight="277.0" prefWidth="271.0">
+      <VBox alignment="CENTER" layoutX="289.0" layoutY="100.0" prefHeight="277.0" prefWidth="271.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
          <children>
             <Button alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openAppointmentList" prefWidth="200.0" text="Appointments" textAlignment="CENTER" textFill="#141414">
                <font>
