@@ -14,7 +14,7 @@ public class SceneMovements {
     public static void goToReportPage(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(SceneMovements.class.getResource("/view/ReportsList.fxml")));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 400, 400);
+        Scene scene = new Scene(root, 500, 400);
         stage.setTitle("Report List");
         stage.setScene(scene);
         stage.show();
