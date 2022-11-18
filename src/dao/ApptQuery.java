@@ -3,43 +3,53 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
-public abstract class CustomerQuery {
-    public static int createCustomer (String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
-        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?,?,?,?,?)";
+public class ApptQuery {
+
+    public static int createAppt (String title, String desc, String location, String type, LocalDateTime start, LocalDateTime end, int customerId, int userId, int contactId) throws SQLException {
+        String sql = "INSERT INTO APPOINTMENTS (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_) VALUES (?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
-        preparedStatement.setString(1, name);
-        preparedStatement.setString(2, address);
-        preparedStatement.setString(3, postalCode);
-        preparedStatement.setString(4, phone);
-        preparedStatement.setInt(5, divisionId);
+        preparedStatement.setString(1, title);
+        preparedStatement.setString(2, desc);
+        preparedStatement.setString(3, location);
+        preparedStatement.setString(4, type);
+        preparedStatement.setDate(5, start);
+        preparedStatement.setDate(6, end);
+        preparedStatement.setInt(7, customerId);
+        preparedStatement.setInt(8, userId);
+        preparedStatement.setInt(9, contactId);
         int rowsAffected = preparedStatement.executeUpdate();
         return rowsAffected;
     }
 
-    public static int updateCustomer (int customerId, String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
-        String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+    public static int updateAppt (String title, String desc, String location, String type, LocalDateTime start, LocalDateTime end, int customerId, int userId, int contactId, int apptId) throws SQLException {
+        String sql = "UPDATE APPOINTMENTS SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
         PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
-        preparedStatement.setString(1, name);
-        preparedStatement.setString(2, address);
-        preparedStatement.setString(3, postalCode);
-        preparedStatement.setString(4, phone);
-        preparedStatement.setInt(5, divisionId);
-        preparedStatement.setInt(6, customerId);
+        preparedStatement.setString(1, title);
+        preparedStatement.setString(2, desc);
+        preparedStatement.setString(3, location);
+        preparedStatement.setString(4, type);
+        preparedStatement.setDate(5, start);
+        preparedStatement.setDate(6, end);
+        preparedStatement.setInt(7, customerId);
+        preparedStatement.setInt(8, userId);
+        preparedStatement.setInt(9, contactId);
+        preparedStatement.setInt(10, apptId);
         int rowsAffected = preparedStatement.executeUpdate();
         return rowsAffected;
     }
 
-    public static int deleteCustomer (int customerId) throws SQLException {
-        String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
+    public static int deleteAppt (int apptId) throws SQLException {
+        String sql = "DELETE FROM APPOINTMENTS WHERE Appointment_ID = ?";
         PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
-        preparedStatement.setInt(1, customerId);
+        preparedStatement.setInt(1, apptId);
         int rowsAffected = preparedStatement.executeUpdate();
         return rowsAffected;
     }
 
-    public static void readCustomer () throws SQLException {
-        String sql = "SELECT * FROM CUSTOMERS";
+    public static void readAppt () throws SQLException {
+        String sql = "SELECT * FROM APPOINTMENTS";
         PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()){
