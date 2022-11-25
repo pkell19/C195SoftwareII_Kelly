@@ -25,7 +25,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
-        //launch(args);
+        launch(args);
         /*int rowsAffected = CustomerQuery.deleteCustomer(4);
         if (rowsAffected > 0) {
             System.out.println("Delete successful!");
@@ -33,9 +33,9 @@ public class Main extends Application {
             System.out.println("Delete failed!");
         }*/
 
-        //CustomerQuery.readCustomer();
+        //CustomerQuery.read();
 
-        //CustomerQuery.readCustomer("28198");
+        //CustomerQuery.read("28198");
 
         JDBC.closeConnection();
     }

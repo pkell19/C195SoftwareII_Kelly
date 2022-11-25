@@ -1,10 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -13,7 +10,7 @@ public class NewAppt {
 
     public TextField newTitle;
     public TextField newDescription;
-    public TextArea newApptType;
+    public ListView newApptType;
     public ComboBox newCustomer;
     public DatePicker newDate;
     public ComboBox newStartTime;

@@ -1,10 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -18,7 +15,7 @@ public class UpdateAppt {
     public ComboBox updateApptContact;
     public TextField updateTitle;
     public TextField updateDescription;
-    public TextArea updateApptType;
+    public ListView updateApptType;
     public TextField updateApptId;
 
     public void onActionToMainMenu(ActionEvent actionEvent) throws IOException {

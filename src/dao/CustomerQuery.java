@@ -1,23 +1,14 @@
 package dao;
 
+import utilities.CustomerDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class CustomerQuery {
-    public static int createCustomer (String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
-        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?,?,?,?,?)";
-        PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
-        preparedStatement.setString(1, name);
-        preparedStatement.setString(2, address);
-        preparedStatement.setString(3, postalCode);
-        preparedStatement.setString(4, phone);
-        preparedStatement.setInt(5, divisionId);
-        int rowsAffected = preparedStatement.executeUpdate();
-        return rowsAffected;
-    }
+public class CustomerQuery implements CustomerDAO {
 
-    public static int updateCustomer (int customerId, String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
+    @Override
+    public int update(int customerId, String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
         String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
         PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
         preparedStatement.setString(1, name);
@@ -26,19 +17,31 @@ public abstract class CustomerQuery {
         preparedStatement.setString(4, phone);
         preparedStatement.setInt(5, divisionId);
         preparedStatement.setInt(6, customerId);
-        int rowsAffected = preparedStatement.executeUpdate();
-        return rowsAffected;
+        return preparedStatement.executeUpdate();
     }
 
-    public static int deleteCustomer (int customerId) throws SQLException {
+    @Override
+    public int create(String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
+        String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?,?,?,?,?)";
+        PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, address);
+        preparedStatement.setString(3, postalCode);
+        preparedStatement.setString(4, phone);
+        preparedStatement.setInt(5, divisionId);
+        return preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public int delete(int customerId) throws SQLException {
         String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
         PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
         preparedStatement.setInt(1, customerId);
-        int rowsAffected = preparedStatement.executeUpdate();
-        return rowsAffected;
+        return preparedStatement.executeUpdate();
     }
 
-    public static void readCustomer () throws SQLException {
+    @Override
+    public void read() throws SQLException {
         String sql = "SELECT * FROM CUSTOMERS";
         PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -51,6 +54,7 @@ public abstract class CustomerQuery {
             int divisionId = resultSet.getInt("Division_ID");
         }
     }
+
     /*public static void readCustomer (String postalCode ) throws SQLException {
         String sql = "SELECT * FROM CUSTOMERS WHERE Postal_Code = ?";
         PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);

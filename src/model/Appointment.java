@@ -13,11 +13,50 @@ public class Appointment {
     private LocalDateTime apptDate;
     private LocalDateTime apptStartTime;
     private LocalDateTime apptEndTime;
+    private LocalDateTime createdDate;
+    private String createdBy;
+    private LocalDateTime lastUpdate;
+    private String lastUpdatedBy;
     private int apptCustomerId;
     private int apptUserId;
     private int apptContactId;
 
-    public Appointment(int apptId, String apptTitle, String apptDescription, String apptLocation, String apptType, LocalDateTime apptDate, LocalDateTime apptStartTime, LocalDateTime apptEndTime, int apptCustomerId, int apptUserId, int apptContactId) {
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public String getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    public void setLastUpdatedBy(String lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
+    }
+
+    public Appointment(int apptId, String apptTitle, String apptDescription, String apptLocation, String apptType,
+                       LocalDateTime apptDate, LocalDateTime apptStartTime, LocalDateTime apptEndTime,
+                       LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
+                       int apptCustomerId, int apptUserId, int apptContactId) {
         this.apptId = apptId;
         this.apptTitle = apptTitle;
         this.apptDescription = apptDescription;
@@ -26,6 +65,10 @@ public class Appointment {
         this.apptDate = apptDate;
         this.apptStartTime = apptStartTime;
         this.apptEndTime = apptEndTime;
+        this.createdDate = createdDate;
+        this.createdBy = createdBy;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdatedBy = lastUpdatedBy;
         this.apptCustomerId = apptCustomerId;
         this.apptUserId = apptUserId;
         this.apptContactId = apptContactId;
