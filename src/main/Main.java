@@ -2,16 +2,17 @@ package main;
 /**
  * @author Patty Kelly
  */
-import dao.CustomerQuery;
-import dao.JDBC;
+import utilities.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilities.TimeConversion;
 
 import java.sql.SQLException;
-import java.util.Objects;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Main extends Application {
 
@@ -25,7 +26,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
-        launch(args);
+        //launch(args);
         /*int rowsAffected = CustomerQuery.deleteCustomer(4);
         if (rowsAffected > 0) {
             System.out.println("Delete successful!");
@@ -36,6 +37,9 @@ public class Main extends Application {
         //CustomerQuery.read();
 
         //CustomerQuery.read("28198");
+
+
+        System.out.println(TimeConversion.convertLDTtoUTCTimestamp(LocalDate.now(), LocalTime.now()));
 
         JDBC.closeConnection();
     }

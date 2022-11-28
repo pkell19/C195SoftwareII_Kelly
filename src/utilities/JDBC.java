@@ -1,7 +1,8 @@
-package dao;
+package utilities;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public abstract class JDBC {
 
@@ -21,11 +22,14 @@ public abstract class JDBC {
             Class.forName(driver); // Locate Driver
             connection = DriverManager.getConnection(jdbcUrl, userName, password); // Reference Connection object
             System.out.println("Connection successful!");
-        }
-        catch(Exception e)
+        } catch(SQLException e)
         {
-            System.out.println("Error:" + e.getMessage());
+            //System.out.println("Error:" + e.getMessage());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
         }
+
     }
 
     public static void closeConnection() {
@@ -35,7 +39,7 @@ public abstract class JDBC {
         }
         catch(Exception e)
         {
-            System.out.println("Error:" + e.getMessage());
+            // do nothing
         }
     }
 }

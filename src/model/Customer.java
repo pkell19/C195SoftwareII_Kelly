@@ -13,7 +13,6 @@ public class Customer {
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
     private int divisionId;
-    private int countryId;
 
     public LocalDateTime getCreatedDate() {
         return createdDate;
@@ -54,7 +53,6 @@ public class Customer {
         this.customerZipCode = customerZipCode;
         this.customerPhone = customerPhone;
         this.divisionId = divisionId;
-        this.countryId = countryId;
     }
 
     public Customer(int customerId, String customerName, String customerAddress, String customerZipCode,
@@ -70,7 +68,6 @@ public class Customer {
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
         this.divisionId = divisionId;
-        this.countryId = countryId;
     }
 
     public int getCustomerId() {
@@ -121,11 +118,4 @@ public class Customer {
         this.divisionId = divisionId;
     }
 
-    public int getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(int countryId) {
-        this.countryId = countryId;
-    }
 }

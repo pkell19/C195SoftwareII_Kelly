@@ -2,7 +2,9 @@ package model;
 
 import javafx.collections.ObservableList;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Appointment {
     private int apptId;
@@ -10,9 +12,9 @@ public class Appointment {
     private String apptDescription;
     private String apptLocation;
     private String apptType;
-    private LocalDateTime apptDate;
-    private LocalDateTime apptStartTime;
-    private LocalDateTime apptEndTime;
+    private LocalDate apptDate;
+    private LocalTime apptStartTime;
+    private LocalTime apptEndTime;
     private LocalDateTime createdDate;
     private String createdBy;
     private LocalDateTime lastUpdate;
@@ -20,6 +22,12 @@ public class Appointment {
     private int apptCustomerId;
     private int apptUserId;
     private int apptContactId;
+
+    public Appointment(int apptId, String title, String description, String location,
+                       String type, LocalDateTime start, LocalDateTime end,
+                       LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate,
+                       String lastUpdatedBy, int customerId, int userId, int contactId) {
+    }
 
     public LocalDateTime getCreatedDate() {
         return createdDate;
@@ -54,7 +62,7 @@ public class Appointment {
     }
 
     public Appointment(int apptId, String apptTitle, String apptDescription, String apptLocation, String apptType,
-                       LocalDateTime apptDate, LocalDateTime apptStartTime, LocalDateTime apptEndTime,
+                       LocalDate apptDate, LocalTime apptStartTime, LocalTime apptEndTime,
                        LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
                        int apptCustomerId, int apptUserId, int apptContactId) {
         this.apptId = apptId;
@@ -114,27 +122,27 @@ public class Appointment {
         this.apptType = apptType;
     }
 
-    public LocalDateTime getApptDate() {
+    public LocalDate getApptDate() {
         return apptDate;
     }
 
-    public void setApptDate(LocalDateTime apptDate) {
+    public void setApptDate(LocalDate apptDate) {
         this.apptDate = apptDate;
     }
 
-    public LocalDateTime getApptStartTime() {
+    public LocalTime getApptStartTime() {
         return apptStartTime;
     }
 
-    public void setApptStartTime(LocalDateTime apptStartTime) {
+    public void setApptStartTime(LocalTime apptStartTime) {
         this.apptStartTime = apptStartTime;
     }
 
-    public LocalDateTime getApptEndTime() {
+    public LocalTime getApptEndTime() {
         return apptEndTime;
     }
 
-    public void setApptEndTime(LocalDateTime apptEndTime) {
+    public void setApptEndTime(LocalTime apptEndTime) {
         this.apptEndTime = apptEndTime;
     }
 
