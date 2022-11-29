@@ -6,7 +6,7 @@ public class Customer {
     private int customerId;
     private String customerName;
     private String customerAddress;
-    private String customerZipCode;
+    private String customerPostalCode;
     private String customerPhone;
     private LocalDateTime createdDate;
     private String createdBy;
@@ -46,22 +46,22 @@ public class Customer {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    public Customer(int customerId, String customerName, String customerAddress, String customerZipCode, String customerPhone, int divisionId, int countryId) {
+    public Customer(int customerId, String customerName, String customerAddress, String customerPostalCode, String customerPhone, int divisionId) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
-        this.customerZipCode = customerZipCode;
+        this.customerPostalCode = customerPostalCode;
         this.customerPhone = customerPhone;
         this.divisionId = divisionId;
     }
 
-    public Customer(int customerId, String customerName, String customerAddress, String customerZipCode,
+    public Customer(int customerId, String customerName, String customerAddress, String customerPostalCode,
                     String customerPhone, LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate,
-                    String lastUpdatedBy, int divisionId, int countryId) {
+                    String lastUpdatedBy, int divisionId) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
-        this.customerZipCode = customerZipCode;
+        this.customerPostalCode = customerPostalCode;
         this.customerPhone = customerPhone;
         this.createdDate = createdDate;
         this.createdBy = createdBy;
@@ -94,12 +94,12 @@ public class Customer {
         this.customerAddress = customerAddress;
     }
 
-    public String getCustomerZipCode() {
-        return customerZipCode;
+    public String getCustomerPostalCode() {
+        return customerPostalCode;
     }
 
-    public void setCustomerZipCode(String customerZipCode) {
-        this.customerZipCode = customerZipCode;
+    public void setCustomerPostalCode(String customerPostalCode) {
+        this.customerPostalCode = customerPostalCode;
     }
 
     public String getCustomerPhone() {

@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 import utilities.TimeConversion;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Main extends Application {
@@ -26,20 +28,17 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
-        //launch(args);
-        /*int rowsAffected = CustomerQuery.deleteCustomer(4);
+        launch(args);
+        /*int rowsAffected = CustomerDAO.deleteCustomer(4);
         if (rowsAffected > 0) {
             System.out.println("Delete successful!");
         } else {
             System.out.println("Delete failed!");
         }*/
 
-        //CustomerQuery.read();
+        //CustomerDAO.read();
 
-        //CustomerQuery.read("28198");
-
-
-        System.out.println(TimeConversion.convertLDTtoUTCTimestamp(LocalDate.now(), LocalTime.now()));
+        //CustomerDAO.read("28198");
 
         JDBC.closeConnection();
     }

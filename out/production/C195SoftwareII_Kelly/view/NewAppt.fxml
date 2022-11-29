@@ -47,7 +47,7 @@
         <children>
             <TextField fx:id="newTitle" promptText="Appointment Title" />
             <TextField fx:id="newDescription" promptText="Location" GridPane.rowIndex="2" />
-            <TextArea fx:id="newApptType" prefHeight="400.0" prefWidth="200.0" promptText="Description" GridPane.rowIndex="1" />
+            <ListView fx:id="newApptType" prefHeight="400.0" prefWidth="200.0" GridPane.rowIndex="1" />
         </children>
     </GridPane>
     <GridPane layoutX="146.0" layoutY="418.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="375.0">

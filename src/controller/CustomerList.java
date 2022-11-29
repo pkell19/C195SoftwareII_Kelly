@@ -1,20 +1,43 @@
 package controller;
 
+import dao.CustomerDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CustomerList {
-    public TableColumn <Customer, Integer> customerId;
-    public TableColumn <Customer, String> customerName;
-    public TableColumn <Customer, String> customerAddress;
-    public TableColumn <Customer, String> customerPostalCode;
-    public TableColumn <Customer, String> customerPhone;
-    public TableColumn <Customer, Integer> customerCountry;
-    public TableColumn <Customer, Integer> customerDivision;
+public class CustomerList implements Initializable{
+    public TableColumn <Customer, Integer> customerIdCol;
+    public TableColumn <Customer, String> customerNameCol;
+    public TableColumn <Customer, String> customerAddressCol;
+    public TableColumn <Customer, String> customerPostalCodeCol;
+    public TableColumn <Customer, String> customerPhoneCol;
+    public TableColumn <Customer, Integer> customerCountryCol;
+    public TableColumn <Customer, Integer> customerDivisionCol;
+    public TableView<Customer> customerListTable;
 
+    ObservableList<Customer> customerList = FXCollections.observableArrayList();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        customerAddressCol.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
+        customerPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("customerPostalCode"));
+        customerPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
+        customerCountryCol.setCellValueFactory(new PropertyValueFactory<>("customerCountry"));
+        customerDivisionCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
+        //TODO: Figure out how to populate the table with the SQL data
+        customerListTable.setItems(customerList);
+    }
     public void onActionToAppt(ActionEvent actionEvent) throws IOException {
         SceneMovements.goToApptList(actionEvent);
     }
@@ -28,6 +51,7 @@ public class CustomerList {
     }
 
     public void toUpdateCustomer(ActionEvent actionEvent) throws IOException {
+        //TODO: Add selection and pass to update customer table
         SceneMovements.goToUpdateCustomer(actionEvent);
     }
 
@@ -38,4 +62,6 @@ public class CustomerList {
     public void deleteCustomer(ActionEvent actionEvent) {
         //TODO: Complete delete customer method
     }
+
+
 }

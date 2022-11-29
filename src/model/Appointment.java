@@ -1,5 +1,6 @@
 package model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
@@ -22,6 +23,8 @@ public class Appointment {
     private int apptCustomerId;
     private int apptUserId;
     private int apptContactId;
+
+    public static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
     public Appointment(int apptId, String title, String description, String location,
                        String type, LocalDateTime start, LocalDateTime end,

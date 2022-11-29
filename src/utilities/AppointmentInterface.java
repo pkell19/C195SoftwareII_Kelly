@@ -5,11 +5,11 @@ import model.Appointment;
 
 public interface AppointmentInterface {
 
-    public static ObservableList<Appointment> getAllAppointments() {
+    static ObservableList<Appointment> getAllAppointments() {
         return null;
     }
 
-    public int updateAppointment(Appointment appointment);
-    public int deleteAppointment(Appointment appointment);
-    public int createAppointment(Appointment appointment);
+    int updateAppointment(Appointment appointment);
+    int deleteAppointment(Appointment appointment);
+    int createAppointment(Appointment appointment);
 }

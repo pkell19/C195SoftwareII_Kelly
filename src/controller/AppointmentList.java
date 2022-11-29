@@ -1,5 +1,6 @@
 package controller;
 
+import dao.AppointmentDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class AppointmentList implements Initializable {
+    public TableView <Appointment> apptTable;
     public TableColumn <Appointment, Integer> apptIdCol;
     public TableColumn <Appointment, String> apptTitleCol;
     public TableColumn <Appointment, String> apptDescriptionCol;
@@ -26,13 +28,9 @@ public class AppointmentList implements Initializable {
     public TableColumn <Appointment, LocalDateTime> apptEndTimeCol;
     public TableColumn <Appointment, Integer> apptCustomerIdCol;
     public TableColumn <Appointment, Integer> apptUserIdCol;
-    public TableView <Appointment> apptList;
-
-    private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        apptList.setItems(allAppointments);
         apptIdCol.setCellValueFactory(new PropertyValueFactory<>("apptId"));
         apptTitleCol.setCellValueFactory(new PropertyValueFactory<>("apptTitle"));
         apptDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("apptDescription"));
@@ -44,6 +42,11 @@ public class AppointmentList implements Initializable {
         apptEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("apptEnd"));
         apptCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("apptCustomerId"));
         apptUserIdCol.setCellValueFactory(new PropertyValueFactory<>("apptUserId"));
+
+        apptTable.setItems(AppointmentDAO.getAllAppointments());
+
+
+        //ObservableList<Appointment> apptList = AppointmentDAO.getAllAppointments();
     }
 
     public void onActionToCustomer(ActionEvent actionEvent) throws IOException {
