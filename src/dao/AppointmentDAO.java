@@ -3,14 +3,13 @@ package dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
-import utilities.AppointmentInterface;
 import utilities.JDBC;
 import utilities.TimeConversion;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 
-public class AppointmentDAO implements AppointmentInterface {
+public class AppointmentDAO {
 
     public static ObservableList<Appointment> getAllAppointments (){
         ObservableList<Appointment> alist = FXCollections.observableArrayList();
@@ -48,7 +47,6 @@ public class AppointmentDAO implements AppointmentInterface {
         return alist;
     }
 
-    @Override
     public int updateAppointment(Appointment appointment) {
         Timestamp startDate = TimeConversion.convertLDTtoUTCTimestamp(appointment.getApptDate(), appointment.getApptStartTime());
         Timestamp endDate = TimeConversion.convertLDTtoUTCTimestamp(appointment.getApptDate(), appointment.getApptEndTime());
@@ -81,7 +79,6 @@ public class AppointmentDAO implements AppointmentInterface {
         return 0;
     }
 
-    @Override
     public int deleteAppointment(Appointment appointment) {
         try {
             String sql = "DELETE FROM APPOINTMENTS WHERE Appointment_ID = ?";
@@ -94,7 +91,6 @@ public class AppointmentDAO implements AppointmentInterface {
         return 0;
     }
 
-    @Override
     public int createAppointment(Appointment appointment) {
         Timestamp startDate = TimeConversion.convertLDTtoUTCTimestamp(appointment.getApptDate(),
                                                                     appointment.getApptStartTime());

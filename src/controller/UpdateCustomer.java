@@ -1,11 +1,15 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import model.Customer;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class UpdateCustomer {
+public class UpdateCustomer implements Initializable {
     public TextField updateCustomerName;
     public TextField updateAddress;
     public TextField updatePostalCode;
@@ -13,6 +17,19 @@ public class UpdateCustomer {
     public TextField updateCountry;
     public TextField updateDivision;
     public TextField customerID;
+
+    private static Customer modCustomer;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateCustomerName.setText(String.valueOf(modCustomer.getCustomerName()));
+        updateAddress.setText(String.valueOf(modCustomer.getCustomerAddress()));
+        updatePostalCode.setText(String.valueOf(modCustomer.getCustomerPostalCode()));
+        updatePhoneNumber.setText(String.valueOf(modCustomer.getCustomerPhone()));
+        updateCountry.setText(String.valueOf(modCustomer.getCountryId()));
+        updateDivision.setText(String.valueOf(modCustomer.getDivisionId()));
+        customerID.setText(String.valueOf(modCustomer.getCustomerId()));
+    }
 
     public void onActSaveCustList(ActionEvent actionEvent) throws IOException {
         //TODO: Add save to customer list
@@ -39,4 +56,8 @@ public class UpdateCustomer {
     public void onActionToAppt(ActionEvent actionEvent) throws IOException {
         SceneMovements.goToApptList(actionEvent);
     }
+
+    public static void updateCustomer(Customer customer) {modCustomer = customer;}
+
+
 }

@@ -8,65 +8,20 @@ public class Customer {
     private String customerAddress;
     private String customerPostalCode;
     private String customerPhone;
-    private LocalDateTime createdDate;
-    private String createdBy;
-    private LocalDateTime lastUpdate;
-    private String lastUpdatedBy;
+    private int countryId;
     private int divisionId;
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public Customer() {
+
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-
-    public Customer(int customerId, String customerName, String customerAddress, String customerPostalCode, String customerPhone, int divisionId) {
+    public Customer(int customerId, String customerName, String customerAddress, String customerPostalCode, String customerPhone, int countryId, int divisionId) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerPostalCode = customerPostalCode;
         this.customerPhone = customerPhone;
-        this.divisionId = divisionId;
-    }
-
-    public Customer(int customerId, String customerName, String customerAddress, String customerPostalCode,
-                    String customerPhone, LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate,
-                    String lastUpdatedBy, int divisionId) {
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.customerAddress = customerAddress;
-        this.customerPostalCode = customerPostalCode;
-        this.customerPhone = customerPhone;
-        this.createdDate = createdDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
+        this.countryId = countryId;
         this.divisionId = divisionId;
     }
 
@@ -110,6 +65,14 @@ public class Customer {
         this.customerPhone = customerPhone;
     }
 
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
+
     public int getDivisionId() {
         return divisionId;
     }
@@ -117,5 +80,4 @@ public class Customer {
     public void setDivisionId(int divisionId) {
         this.divisionId = divisionId;
     }
-
 }

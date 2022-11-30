@@ -2,6 +2,9 @@ package main;
 /**
  * @author Patty Kelly
  */
+import dao.CustomerDAO;
+import javafx.collections.ObservableList;
+import model.Customer;
 import utilities.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utilities.TimeConversion;
 
+import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -39,6 +43,13 @@ public class Main extends Application {
         //CustomerDAO.read();
 
         //CustomerDAO.read("28198");
+
+        /*ObservableList <Customer> testCustomerList = CustomerDAO.getAllCustomer();
+        for (Customer c: testCustomerList) {
+            System.out.println(c.getCustomerId() + " | " + c.getCustomerName() + " | " + c.getCustomerAddress()
+                    + " | " + c.getCustomerPhone() + " | " + c.getCustomerPostalCode() + " | " + c.getCountryId()
+                    + " | " + c.getDivisionId());
+        }*/
 
         JDBC.closeConnection();
     }

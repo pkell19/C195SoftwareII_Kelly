@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,20 +24,21 @@ public class CustomerList implements Initializable{
     public TableColumn <Customer, Integer> customerCountryCol;
     public TableColumn <Customer, Integer> customerDivisionCol;
     public TableView<Customer> customerListTable;
-
-    ObservableList<Customer> customerList = FXCollections.observableArrayList();
+    ObservableList<Customer> customerList = CustomerDAO.getAllCustomer();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        customerListTable.setItems(customerList);
         customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         customerAddressCol.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
         customerPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("customerPostalCode"));
         customerPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
-        customerCountryCol.setCellValueFactory(new PropertyValueFactory<>("customerCountry"));
+        customerCountryCol.setCellValueFactory(new PropertyValueFactory<>("countryId"));
         customerDivisionCol.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
-        //TODO: Figure out how to populate the table with the SQL data
-        customerListTable.setItems(customerList);
+        //DONE: Figure out how to populate the table with the SQL data
+
     }
     public void onActionToAppt(ActionEvent actionEvent) throws IOException {
         SceneMovements.goToApptList(actionEvent);
@@ -51,8 +53,21 @@ public class CustomerList implements Initializable{
     }
 
     public void toUpdateCustomer(ActionEvent actionEvent) throws IOException {
-        //TODO: Add selection and pass to update customer table
-        SceneMovements.goToUpdateCustomer(actionEvent);
+        Customer c = customerListTable.getSelectionModel().getSelectedItem();
+        UpdateCustomer.updateCustomer(c);
+
+        if (c == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "First select the customer you want to modify.");
+            alert.setTitle("Select Customer");
+            alert.showAndWait();
+        }
+         //DONE: Add selection and pass to update customer table
+        try {
+            SceneMovements.goToUpdateCustomer(actionEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void toNewCustomer(ActionEvent actionEvent) throws IOException {
@@ -62,6 +77,4 @@ public class CustomerList implements Initializable{
     public void deleteCustomer(ActionEvent actionEvent) {
         //TODO: Complete delete customer method
     }
-
-
 }
