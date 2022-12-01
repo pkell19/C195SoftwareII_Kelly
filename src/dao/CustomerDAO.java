@@ -49,17 +49,17 @@ public class CustomerDAO {
         return 0;
     }
 
-    public int deleteCustomer(int customerId) {
+    public static void deleteCustomer(int customerId) {
         try {
             String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
             PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
             preparedStatement.setInt(1, customerId);
-            return preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return 0;
+        //return 0;
     }
 
     public Customer getCustomer(int customerId) {

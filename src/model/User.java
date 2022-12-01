@@ -54,4 +54,9 @@ public class User {
     public String getLastUpdatedBy() {
         return lastUpdatedBy;
     }
+
+    @Override
+    public String toString() {
+        return (userName + " (" + userId + ")");
+    }
 }

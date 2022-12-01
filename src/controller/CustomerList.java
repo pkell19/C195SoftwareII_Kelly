@@ -1,16 +1,15 @@
 package controller;
 
 import dao.CustomerDAO;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,12 +51,12 @@ public class CustomerList implements Initializable{
         SceneMovements.goToMainMenu(actionEvent);
     }
 
-    public void toUpdateCustomer(ActionEvent actionEvent) throws IOException {
+    public void toUpdateCustomer(ActionEvent actionEvent) {
         Customer c = customerListTable.getSelectionModel().getSelectedItem();
         UpdateCustomer.updateCustomer(c);
 
         if (c == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "First select the customer you want to modify.");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "First select the customer you want to delete.");
             alert.setTitle("Select Customer");
             alert.showAndWait();
         }
@@ -67,7 +66,6 @@ public class CustomerList implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void toNewCustomer(ActionEvent actionEvent) throws IOException {
@@ -75,6 +73,20 @@ public class CustomerList implements Initializable{
     }
 
     public void deleteCustomer(ActionEvent actionEvent) {
-        //TODO: Complete delete customer method
+        Customer c = customerListTable.getSelectionModel().getSelectedItem();
+        if (c == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "First select the customer you want to modify.");
+            alert.setTitle("Select Customer");
+            alert.showAndWait();
+        }
+        //DONE: Complete delete customer method
+        //TODO: add reference to lambda
+        Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + c.getCustomerName() + "?");
+        alert2.setTitle("Verify Deletion");
+        alert2.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                CustomerDAO.deleteCustomer(c.getCustomerId());
+            }
+        });
     }
 }

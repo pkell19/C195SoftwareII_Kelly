@@ -54,4 +54,9 @@ public class Division {
     public String getLastUpdatedBy() {
         return lastUpdatedBy;
     }
+
+    @Override
+    public String toString() {
+        return (division + " (" + divisionId + ")");
+    }
 }

@@ -47,4 +47,9 @@ public class Country {
     public String getLastUpdatedBy() {
         return lastUpdatedBy;
     }
+
+    @Override
+    public String toString() {
+        return (country + " (" + countryId + ")");
+    }
 }

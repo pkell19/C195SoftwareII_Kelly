@@ -172,4 +172,9 @@ public class Appointment {
     public void setApptContactId(int apptContactId) {
         this.apptContactId = apptContactId;
     }
+
+    @Override
+    public String toString() {
+        return (apptType);
+    }
 }
