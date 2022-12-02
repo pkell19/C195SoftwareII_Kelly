@@ -17,6 +17,11 @@ public class Division {
         this.countryId = countryId;
     }
 
+    public Division(int divisionId, String division) {
+        this.divisionId = divisionId;
+        this.division = division;
+    }
+
     public Division(int divisionId, String division, int countryId, LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
         this.divisionId = divisionId;
         this.division = division;

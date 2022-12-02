@@ -3,6 +3,7 @@ package dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;
+import model.Division;
 import utilities.JDBC;
 import utilities.TimeConversion;
 
@@ -29,23 +30,21 @@ public class CustomerDAO {
         return 0;
     }
 
-    public int createCustomer(Customer customer) {
+    public static int createCustomer(Customer customer) {
         try {
-            String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Create_Date, Division_ID) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?,?,?,?,?)";
             Timestamp createDate = TimeConversion.convertLDTtoUTCTimestamp(LocalDateTime.now());
 
             PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
             preparedStatement.setString(1, customer.getCustomerName());
             preparedStatement.setString(2, customer.getCustomerAddress());
-            preparedStatement.setString(3, customer.getCustomerPhone());
+            preparedStatement.setString(3, customer.getCustomerPostalCode());
             preparedStatement.setString(4, customer.getCustomerPhone());
-            preparedStatement.setTimestamp(5, createDate);
-            preparedStatement.setInt(6, customer.getCustomerId());
+            preparedStatement.setInt(5, customer.getDivisionId());
             return preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return 0;
     }
 
@@ -54,7 +53,7 @@ public class CustomerDAO {
             String sql = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?";
             PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
             preparedStatement.setInt(1, customerId);
-            preparedStatement.executeUpdate();
+            preparedStatement.execute();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -89,5 +88,25 @@ public class CustomerDAO {
             throwables.printStackTrace();
         }
         return customerList;
+    }
+
+    public static ObservableList<Division> filterDivisionCombo (int countryId) {
+        ObservableList<Division> filteredDivision = FXCollections.observableArrayList();
+        try {
+            String sql = "SELECT * FROM first_level_divisions, countries" +
+                    " WHERE first_level_divisions.Country_ID = countries.Country_ID" +
+                    " AND countries.Country_ID = \"" + countryId + "\"";
+            PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int divisionId = resultSet.getInt("first_level_divisions.Division_ID");
+                String division = resultSet.getString("first_level_divisions.Division");
+                Division d = new Division(divisionId, division);
+                filteredDivision.add(d);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return filteredDivision;
     }
 }

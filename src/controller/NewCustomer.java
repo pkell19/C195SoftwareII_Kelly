@@ -1,8 +1,11 @@
 package controller;
 
+import com.mysql.cj.protocol.Resultset;
 import dao.CountryDAO;
+import dao.CustomerDAO;
 import dao.DivisionDAO;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -10,11 +13,14 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import model.Country;
+import model.Customer;
 import model.Division;
 import org.w3c.dom.Text;
 
+import javax.xml.transform.Result;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -36,24 +42,16 @@ public class NewCustomer implements Initializable {
     }
 
     public void newCountrySelection(ActionEvent actionEvent) {
-        ObservableList<Division> divisions = DivisionDAO.getAllDivisions();
-        newCountryCombo.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
-            TextField editor = newCountryCombo.getEditor();
-            Country selected = newCountryCombo.getSelectionModel().getSelectedItem();
-            if (selected == null || !selected.equals()) {
-                newDivisionCombo.setVisible(true);
-            }
-        });
-
-    }
-
+        if (newCountryCombo != null ) {
+            newDivisionCombo.setVisible(true);
+        }
+        Country selectedCountry = newCountryCombo.getSelectionModel().getSelectedItem();
+        newDivisionCombo.setItems(CustomerDAO.filterDivisionCombo(selectedCountry.getCountryId()));
         newDivisionCombo.setVisibleRowCount(5);
         newDivisionCombo.setPromptText("Select division.");
-
-        while (newCountryCombo.getSelectionModel().))
-
-
     }
+
+
     public void onActSaveCustList(ActionEvent actionEvent) throws IOException {
 
         try {
@@ -61,8 +59,8 @@ public class NewCustomer implements Initializable {
             String address = String.valueOf(newAddress.getText());
             String postalCode = String.valueOf(newPostalCode.getText());
             String phone = String.valueOf(newPhoneNumber.getText());
-            //int countryId = Integer.parseInt(newCountry.get());
-            //int divisionId = Integer.parseInt(newDivision.getText());
+            int countryId = newCountryCombo.getValue().getCountryId();
+            int divisionId = newDivisionCombo.getValue().getDivisionId();
 
             if (name.isEmpty() | address.isEmpty() | postalCode.isEmpty() | phone.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Please complete every field!", ButtonType.OK);
@@ -71,12 +69,16 @@ public class NewCustomer implements Initializable {
             } else {
                 //TODO: enter validation statements here
             }
+            Customer c = new Customer(name, address, postalCode, phone, countryId, divisionId);
+            if (CustomerDAO.createCustomer(c) > 0){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Customer information saved!", ButtonType.OK);
+                alert.showAndWait();
+            }
+            //DONE: Add coding to save to customer list
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
 
-
-        //TODO: Add coding to save to customer list
         SceneMovements.goToCustomerList(actionEvent);
     }
 

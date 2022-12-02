@@ -5,6 +5,7 @@ package main;
 import dao.CustomerDAO;
 import javafx.collections.ObservableList;
 import model.Customer;
+import model.Division;
 import utilities.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -44,12 +45,12 @@ public class Main extends Application {
 
         //CustomerDAO.read("28198");
 
-        /*ObservableList <Customer> testCustomerList = CustomerDAO.getAllCustomer();
-        for (Customer c: testCustomerList) {
-            System.out.println(c.getCustomerId() + " | " + c.getCustomerName() + " | " + c.getCustomerAddress()
-                    + " | " + c.getCustomerPhone() + " | " + c.getCustomerPostalCode() + " | " + c.getCountryId()
-                    + " | " + c.getDivisionId());
+        /*ObservableList <Division> testDivisionList = CustomerDAO.filterDivisionCombo(1);
+        for (Division d: testDivisionList) {
+            System.out.println(d.getDivisionId() + " | " + d.getDivision() + " | " + d.getCountryId());
         }*/
+
+
 
         JDBC.closeConnection();
     }
