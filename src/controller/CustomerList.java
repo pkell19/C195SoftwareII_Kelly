@@ -3,15 +3,17 @@ package controller;
 import dao.CustomerDAO;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Customer;
+import utilities.SceneMovements;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerList implements Initializable{
@@ -39,21 +41,10 @@ public class CustomerList implements Initializable{
         //DONE: Figure out how to populate the table with the SQL data
 
     }
-    public void onActionToAppt(ActionEvent actionEvent) throws IOException {
-        SceneMovements.goToApptList(actionEvent);
-    }
 
-    public void onActionToReport(ActionEvent actionEvent) throws IOException {
-        SceneMovements.goToReportPage(actionEvent);
-    }
-
-    public void onActionToMainMenu(ActionEvent actionEvent) throws IOException {
-        SceneMovements.goToMainMenu(actionEvent);
-    }
-
-    public void toUpdateCustomer(ActionEvent actionEvent) {
+    public void toUpdateCustomer(ActionEvent actionEvent){
         Customer c = customerListTable.getSelectionModel().getSelectedItem();
-        UpdateCustomer.updateCustomer(c);
+        UpdateCustomer.passingTheCustomer(c);
 
         if (c == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "First select the customer you want to delete.");
@@ -61,14 +52,10 @@ public class CustomerList implements Initializable{
             alert.showAndWait();
         }
          //DONE: Add selection and pass to update customer table
-        try {
-            SceneMovements.goToUpdateCustomer(actionEvent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SceneMovements.goToUpdateCustomer(actionEvent);
     }
 
-    public void toNewCustomer(ActionEvent actionEvent) throws IOException {
+    public void toNewCustomer(ActionEvent actionEvent) {
         SceneMovements.goToNewCustomer(actionEvent);
     }
 
@@ -81,12 +68,24 @@ public class CustomerList implements Initializable{
         }
         //DONE: Complete delete customer method
         //TODO: add reference to lambda
-        Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + c.getCustomerName() + "?");
+        Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + c.getCustomerName() + "?",ButtonType.YES,ButtonType.NO);
         alert2.setTitle("Verify Deletion");
         alert2.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
+            if (response == ButtonType.YES) {
                 CustomerDAO.deleteCustomer(c.getCustomerId());
             }
         });
+        //TODO: Refresh table after deletion
+    }
+    public void onActionToAppt(ActionEvent actionEvent) {
+        SceneMovements.goToApptList(actionEvent);
+    }
+
+    public void onActionToReport(ActionEvent actionEvent) {
+        SceneMovements.goToReportPage(actionEvent);
+    }
+
+    public void onActionToMainMenu(ActionEvent actionEvent) throws IOException {
+        SceneMovements.goToMainMenu(actionEvent);
     }
 }

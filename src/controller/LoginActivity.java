@@ -2,6 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
+import utilities.SceneMovements;
 
 import java.io.IOException;
 

@@ -20,7 +20,10 @@
           <root url="jar://$MODULE_DIR$/lib/javafx-base-11-win.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/javafx-fxml-11.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/javafx-fxml-11-win.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="library" name="mysql-connector-java-8.0.25" level="project" />

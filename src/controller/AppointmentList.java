@@ -1,14 +1,13 @@
 package controller;
 
 import dao.AppointmentDAO;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Appointment;
+import utilities.SceneMovements;
 
 import java.io.IOException;
 import java.net.URL;

@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import utilities.SceneMovements;
 
 import java.io.IOException;
 

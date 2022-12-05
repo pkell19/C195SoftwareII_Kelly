@@ -2,7 +2,9 @@ package main;
 /**
  * @author Patty Kelly
  */
+import dao.CountryDAO;
 import dao.CustomerDAO;
+import dao.DivisionDAO;
 import javafx.collections.ObservableList;
 import model.Customer;
 import model.Division;
@@ -34,6 +36,7 @@ public class Main extends Application {
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
         launch(args);
+        //System.out.println(DivisionDAO.getDivision(12));
         /*int rowsAffected = CustomerDAO.deleteCustomer(4);
         if (rowsAffected > 0) {
             System.out.println("Delete successful!");
