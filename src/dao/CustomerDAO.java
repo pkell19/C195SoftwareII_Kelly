@@ -3,26 +3,24 @@ package dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;
-import model.Division;
 import utilities.JDBC;
 import utilities.TimeConversion;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 
 public class CustomerDAO {
 
-    public int updateCustomer(Customer customer) {
+    public static int updateCustomer(Customer customer) {
         try {
-            String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Create_Date = ?, Created_By = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
+            String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?,Division_ID = ? WHERE Customer_ID = ?";
 
             PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
             preparedStatement.setString(1, customer.getCustomerName());
             preparedStatement.setString(2, customer.getCustomerAddress());
             preparedStatement.setString(3, customer.getCustomerPostalCode());
             preparedStatement.setString(4, customer.getCustomerPhone());
-            preparedStatement.setInt(9, customer.getDivisionId());
-            preparedStatement.setInt(10, customer.getCustomerId());
+            preparedStatement.setInt(5, customer.getDivisionId());
+            preparedStatement.setInt(6, customer.getCustomerId());
             return preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -30,7 +28,7 @@ public class CustomerDAO {
         return 0;
     }
 
-    public static int createCustomer(Customer customer) {
+    public static void createCustomer(Customer customer) {
         try {
             String sql = "INSERT INTO CUSTOMERS (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?,?,?,?,?)";
             Timestamp createDate = TimeConversion.convertLDTtoUTCTimestamp(LocalDateTime.now());
@@ -41,11 +39,10 @@ public class CustomerDAO {
             preparedStatement.setString(3, customer.getCustomerPostalCode());
             preparedStatement.setString(4, customer.getCustomerPhone());
             preparedStatement.setInt(5, customer.getDivisionId());
-            return preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return 0;
     }
 
     public static void deleteCustomer(int customerId) {

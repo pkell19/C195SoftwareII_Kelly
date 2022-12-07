@@ -41,6 +41,7 @@ public class NewCustomer implements Initializable {
         if (newCountryCombo != null ) {
             newDivisionCombo.setVisible(true);
         }
+        assert newCountryCombo != null;
         Country selectedCountry = newCountryCombo.getSelectionModel().getSelectedItem();
         newDivisionCombo.setItems(DivisionDAO.filterDivisionCombo(selectedCountry.getCountryId()));
         newDivisionCombo.setVisibleRowCount(5);

@@ -5,14 +5,20 @@ import dao.CustomerDAO;
 import dao.DivisionDAO;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
 import model.Division;
 import utilities.SceneMovements;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UpdateCustomer implements Initializable {
@@ -35,19 +41,24 @@ public class UpdateCustomer implements Initializable {
         updateAddress.setText(String.valueOf(passedCustomer.getCustomerAddress()));
         updatePostalCode.setText(String.valueOf(passedCustomer.getCustomerPostalCode()));
         updatePhoneNumber.setText(String.valueOf(passedCustomer.getCustomerPhone()));
-        Country passedCountry = CountryDAO.getCountry(passedCustomer.getCustomerId());
+        Country passedCountry = CountryDAO.getCountry(passedCustomer.getCountryId());
         Division passedDivision = DivisionDAO.getDivision(passedCustomer.getDivisionId());
-        updateCountryCombo.setValue(passedCountry); //TODO: Fox
+        updateCountryCombo.setValue(passedCountry); //DONE: Fix
         updateDivisionCombo.setValue(passedDivision);
     }
 
-    public void updateCountrySelection(ActionEvent actionEvent) {
+    public void updateCountrySelection(MouseEvent actionEvent) {
         updateDivisionCombo.getSelectionModel().clearSelection();
+        updateDivisionCombo.setValue(null);
         updateCountryCombo.setItems(countries);
+        //DONE: Fix
+    }
+
+    public void onSelectCustomer(ActionEvent actionEvent) {
+
         Country selectedCountry = updateCountryCombo.getSelectionModel().getSelectedItem();
         updateDivisionCombo.setItems(DivisionDAO.filterDivisionCombo(selectedCountry.getCountryId()));
         updateDivisionCombo.setVisibleRowCount(5);
-        //TODO: Fix
     }
 
     public void onActSaveCustList(ActionEvent actionEvent) {
@@ -67,11 +78,10 @@ public class UpdateCustomer implements Initializable {
         }
         //TODO: enter validation statements here
         Customer updatedCustomer = new Customer(name, address, postalCode, phone, countryId, divisionId);
-        CustomerDAO.createCustomer(updatedCustomer);
+        CustomerDAO.updateCustomer(updatedCustomer);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Customer information saved!", ButtonType.OK);
         alert.showAndWait();
-        SceneMovements.goToCustomerList(actionEvent);
     }
 
         public void onActNoSaveCustList (ActionEvent actionEvent) throws IOException {
@@ -94,7 +104,6 @@ public class UpdateCustomer implements Initializable {
         public void onActionToAppt (ActionEvent actionEvent) throws IOException {
             SceneMovements.goToApptList(actionEvent);
         }
-
 
 
 
