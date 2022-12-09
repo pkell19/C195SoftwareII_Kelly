@@ -1,6 +1,7 @@
 package controller;
 
 import dao.AppointmentDAO;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -11,41 +12,40 @@ import utilities.SceneMovements;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AppointmentList implements Initializable {
-    public TableView <Appointment> apptTable;
     public TableColumn <Appointment, Integer> apptIdCol;
     public TableColumn <Appointment, String> apptTitleCol;
     public TableColumn <Appointment, String> apptDescriptionCol;
     public TableColumn <Appointment, String> apptLocationCol;
-    public TableColumn <Appointment, String> apptContactCol;
     public TableColumn <Appointment, String> apptTypeCol;
-    public TableColumn <Appointment, LocalDateTime> apptDateCol;
-    public TableColumn <Appointment, LocalDateTime> apptStartTimeCol;
-    public TableColumn <Appointment, LocalDateTime> apptEndTimeCol;
+    public TableColumn <Appointment, LocalDate> apptDateCol;
+    public TableColumn <Appointment, LocalTime> apptStartTimeCol;
+    public TableColumn <Appointment, LocalTime> apptEndTimeCol;
     public TableColumn <Appointment, Integer> apptCustomerIdCol;
     public TableColumn <Appointment, Integer> apptUserIdCol;
+    public TableColumn <Appointment, Integer> apptContactIdCol;
+    public TableView <Appointment> apptListTableView;
+    ObservableList<Appointment> appointmentList = AppointmentDAO.getAllAppointments();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        apptListTableView.setItems(appointmentList);
         apptIdCol.setCellValueFactory(new PropertyValueFactory<>("apptId"));
         apptTitleCol.setCellValueFactory(new PropertyValueFactory<>("apptTitle"));
         apptDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("apptDescription"));
         apptLocationCol.setCellValueFactory(new PropertyValueFactory<>("apptLocation"));
-        apptContactCol.setCellValueFactory(new PropertyValueFactory<>("apptContact"));
         apptTypeCol.setCellValueFactory(new PropertyValueFactory<>("apptType"));
         apptDateCol.setCellValueFactory(new PropertyValueFactory<>("apptDate"));
-        apptStartTimeCol.setCellValueFactory(new PropertyValueFactory<>("apptStart"));
-        apptEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("apptEnd"));
+        apptStartTimeCol.setCellValueFactory(new PropertyValueFactory<>("apptStartTime"));
+        apptEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("apptEndTime"));
         apptCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("apptCustomerId"));
         apptUserIdCol.setCellValueFactory(new PropertyValueFactory<>("apptUserId"));
-
-        apptTable.setItems(AppointmentDAO.getAllAppointments());
-
-
-        //ObservableList<Appointment> apptList = AppointmentDAO.getAllAppointments();
+        apptContactIdCol.setCellValueFactory(new PropertyValueFactory<>("apptContactId"));
     }
 
     public void onActionToCustomer(ActionEvent actionEvent) throws IOException {

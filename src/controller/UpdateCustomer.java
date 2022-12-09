@@ -61,7 +61,7 @@ public class UpdateCustomer implements Initializable {
         updateDivisionCombo.setVisibleRowCount(5);
     }
 
-    public void onActSaveCustList(ActionEvent actionEvent) {
+    public void onActSaveCustList(ActionEvent actionEvent) throws IOException {
         //TODO: Add save to customer list
         String name = String.valueOf(updateCustomerName.getText());
         String address = String.valueOf(updateAddress.getText());
@@ -79,6 +79,7 @@ public class UpdateCustomer implements Initializable {
         //TODO: enter validation statements here
         Customer updatedCustomer = new Customer(name, address, postalCode, phone, countryId, divisionId);
         CustomerDAO.updateCustomer(updatedCustomer);
+        SceneMovements.goToCustomerList(actionEvent);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Customer information saved!", ButtonType.OK);
         alert.showAndWait();
@@ -104,7 +105,4 @@ public class UpdateCustomer implements Initializable {
         public void onActionToAppt (ActionEvent actionEvent) throws IOException {
             SceneMovements.goToApptList(actionEvent);
         }
-
-
-
 }

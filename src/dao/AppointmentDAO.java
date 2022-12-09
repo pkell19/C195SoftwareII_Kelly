@@ -3,11 +3,14 @@ package dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
+import model.Customer;
 import utilities.JDBC;
 import utilities.TimeConversion;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class AppointmentDAO {
 
@@ -25,21 +28,17 @@ public class AppointmentDAO {
                 String location = resultSet.getString("Location");
                 String type = resultSet.getString("Type");
                 Timestamp s = resultSet.getTimestamp("Start");
-                LocalDateTime start = s.toLocalDateTime();
+                LocalTime start = s.toLocalDateTime().toLocalTime();
+                LocalDate date = s.toLocalDateTime().toLocalDate();
                 Timestamp e = resultSet.getTimestamp("End");
-                LocalDateTime end = e.toLocalDateTime();
-                Timestamp cd = resultSet.getTimestamp("Create_Date");
-                LocalDateTime createDate = cd.toLocalDateTime();
-                String createdBy = resultSet.getString("Created_By");
-                Timestamp lu = resultSet.getTimestamp("Last_Update");
-                LocalDateTime lastUpdate = lu.toLocalDateTime();
-                String lastUpdatedBy = resultSet.getString("Last_Updated_By");
+                LocalTime end = e.toLocalDateTime().toLocalTime();
                 int customerId = resultSet.getInt("Customer_ID");
                 int userId = resultSet.getInt("User_ID");
                 int contactId = resultSet.getInt("Contact_ID");
 
-                Appointment a = new Appointment(apptId, title, description, location, type, start, end, createDate, createdBy, lastUpdate, lastUpdatedBy, customerId, userId, contactId);
+                Appointment a = new Appointment(apptId, title, description, location, type, date, start, end, customerId, userId, contactId);
                 alist.add(a);
+
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -114,6 +113,50 @@ public class AppointmentDAO {
             preparedStatement.setInt(10, appointment.getApptUserId());
             preparedStatement.setInt(11, appointment.getApptContactId());
             return preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    public Appointment getAppt(int apptId) {
+        try {
+            String sql = "SELECT * appointments WHERE Appointment_ID = '" + apptId + "'";
+            PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            int id = resultSet.getInt("Appointment_ID");
+            String title = resultSet.getString("Title");
+            String description = resultSet.getString("Description");
+            String location = resultSet.getString("Location");
+            String type = resultSet.getString("Type");
+            Timestamp s = resultSet.getTimestamp("Start");
+            LocalTime start = s.toLocalDateTime().toLocalTime();
+            LocalDate date = s.toLocalDateTime().toLocalDate();
+            Timestamp e = resultSet.getTimestamp("End");
+            LocalTime end = e.toLocalDateTime().toLocalTime();
+            int customerId = resultSet.getInt("Customer_ID");
+            int userId = resultSet.getInt("User_ID");
+            int contactId = resultSet.getInt("Contact_ID");
+
+            return new Appointment(id, title, description, location, type, date, start, end, customerId, userId, contactId);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static int checkForCustomerAppointmentLinks (int customerId){
+        try {
+            String sql = "SELECT * FROM appointments WHERE Customer_ID = '" + customerId + "'";
+            PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int id = resultSet.getInt("Appointment_ID");
+            if (id == Integer.parseInt(null)) {
+                return 0;
+            }
+            return id;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

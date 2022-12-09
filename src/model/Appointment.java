@@ -32,6 +32,43 @@ public class Appointment {
                        String lastUpdatedBy, int customerId, int userId, int contactId) {
     }
 
+    public Appointment(int apptId, String apptTitle, String apptDescription, String apptLocation, String apptType,
+                       LocalDate apptDate, LocalTime apptStartTime, LocalTime apptEndTime, int apptCustomerId,
+                       int apptUserId, int apptContactId) {
+        this.apptId = apptId;
+        this.apptTitle = apptTitle;
+        this.apptDescription = apptDescription;
+        this.apptLocation = apptLocation;
+        this.apptType = apptType;
+        this.apptDate = apptDate;
+        this.apptStartTime = apptStartTime;
+        this.apptEndTime = apptEndTime;
+        this.apptCustomerId = apptCustomerId;
+        this.apptUserId = apptUserId;
+        this.apptContactId = apptContactId;
+    }
+
+    public Appointment(int apptId, String apptTitle, String apptDescription, String apptLocation, String apptType,
+                       LocalDate apptDate, LocalTime apptStartTime, LocalTime apptEndTime,
+                       LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
+                       int apptCustomerId, int apptUserId, int apptContactId) {
+        this.apptId = apptId;
+        this.apptTitle = apptTitle;
+        this.apptDescription = apptDescription;
+        this.apptLocation = apptLocation;
+        this.apptType = apptType;
+        this.apptDate = apptDate;
+        this.apptStartTime = apptStartTime;
+        this.apptEndTime = apptEndTime;
+        this.createdDate = createdDate;
+        this.createdBy = createdBy;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdatedBy = lastUpdatedBy;
+        this.apptCustomerId = apptCustomerId;
+        this.apptUserId = apptUserId;
+        this.apptContactId = apptContactId;
+    }
+
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }
@@ -62,27 +99,6 @@ public class Appointment {
 
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
-    }
-
-    public Appointment(int apptId, String apptTitle, String apptDescription, String apptLocation, String apptType,
-                       LocalDate apptDate, LocalTime apptStartTime, LocalTime apptEndTime,
-                       LocalDateTime createdDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy,
-                       int apptCustomerId, int apptUserId, int apptContactId) {
-        this.apptId = apptId;
-        this.apptTitle = apptTitle;
-        this.apptDescription = apptDescription;
-        this.apptLocation = apptLocation;
-        this.apptType = apptType;
-        this.apptDate = apptDate;
-        this.apptStartTime = apptStartTime;
-        this.apptEndTime = apptEndTime;
-        this.createdDate = createdDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
-        this.apptCustomerId = apptCustomerId;
-        this.apptUserId = apptUserId;
-        this.apptContactId = apptContactId;
     }
 
     public int getApptId() {

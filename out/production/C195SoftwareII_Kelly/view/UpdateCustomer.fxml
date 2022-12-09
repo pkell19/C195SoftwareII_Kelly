@@ -33,7 +33,7 @@
             <TextField fx:id="updatePhoneNumber" promptText="Phone Number" GridPane.rowIndex="3" />
          <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="4">
             <children>
-               <ComboBox fx:id="updateCountryCombo" onAction="#updateCountrySelection" prefWidth="150.0" />
+               <ComboBox fx:id="updateCountryCombo" onAction="#onSelectCustomer" onMouseClicked="#updateCountrySelection" prefWidth="150.0" />
                <ComboBox fx:id="updateDivisionCombo" prefWidth="150.0" />
             </children>
          </HBox>
