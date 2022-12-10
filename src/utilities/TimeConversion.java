@@ -30,5 +30,4 @@ public class TimeConversion {
         ZonedDateTime localZDT = ZonedDateTime.ofInstant(Instant.from(utcLDT), LOCAL_ZONE_ID);
         return localZDT.toLocalDateTime();
     }
-
 }

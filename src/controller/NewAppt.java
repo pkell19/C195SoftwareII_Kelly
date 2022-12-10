@@ -1,5 +1,6 @@
 package controller;
 
+import dao.ContactDAO;
 import dao.CustomerDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,18 +8,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import model.Appointment;
+import model.Contact;
 import model.Customer;
 import utilities.SceneMovements;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class NewAppt implements Initializable {
 
     public TextField newApptId;
     public TextField newApptTitle;
-    public ListView newApptDescription;
+    public TextField newApptDescription;
     public TextField newApptLocation;
     public ComboBox newApptCustomerCombo;
     public DatePicker newApptDatePicker;
@@ -30,13 +33,34 @@ public class NewAppt implements Initializable {
 
     ObservableList<Appointment> newAppointment = FXCollections.observableArrayList();
     ObservableList<Customer> customerList = CustomerDAO.getAllCustomer();
+    ObservableList<Contact> contactList = ContactDAO.getallContacts();
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        newCountryCombo.setItems(countries);
-        newCountryCombo.setVisibleRowCount(5);
-        newCountryCombo.setPromptText("Select country.");
+        newApptContactCombo.setItems(contactList);
+        newApptContactCombo.setVisibleRowCount(5);
+        newApptContactCombo.setPromptText("Select country.");
+
+        newApptCustomerCombo.setItems(customerList);
+        newApptCustomerCombo.setVisibleRowCount(5);
+        newApptCustomerCombo.setPromptText("Select customer.");
+
+        LocalTime start = LocalTime.of(0, 1);
+        LocalTime end = LocalTime.of(23, 59);
+
+        /*while(start.isBefore(end.plusSeconds(1))){
+            newApptStartCombo.getItems().add(start);
+            start = start.plusMinutes(30);
+        }
+        newApptStartCombo.getSelectionModel().select(LocalTime.now());
+
+        while (end.isAfter(start.plusSeconds(1))) {
+            newApptEndCombo.getItems().add(end);
+            end = end.plusMinutes(30);
+        }
+        newApptEndCombo.getSelectionModel().select(LocalTime.now());*/
 
     }
 

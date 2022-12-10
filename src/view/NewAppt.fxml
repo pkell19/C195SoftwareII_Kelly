@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -51,15 +50,13 @@
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="43.0" minHeight="20.0" prefHeight="43.0" vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="40.0" minHeight="11.0" prefHeight="11.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="174.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="40.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="180.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
         <children>
             <TextField fx:id="newApptTitle" prefHeight="33.0" prefWidth="520.0" promptText="Appointment Title" />
-            <TextField fx:id="newApptLocation" promptText="Location" GridPane.rowIndex="3" />
-            <ListView fx:id="newApptDescription" editable="true" prefHeight="194.0" prefWidth="520.0" GridPane.rowIndex="2" />
-         <Label text="Description" GridPane.rowIndex="1" />
+            <TextField fx:id="newApptLocation" prefHeight="32.0" prefWidth="520.0" promptText="Location" GridPane.rowIndex="2" />
+         <TextField fx:id="newApptDescription" prefHeight="175.0" prefWidth="520.0" promptText="Appointment Details" GridPane.rowIndex="1" />
         </children>
     </GridPane>
     <GridPane layoutX="40.0" layoutY="379.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="379.0">
