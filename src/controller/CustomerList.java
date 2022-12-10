@@ -68,7 +68,7 @@ public class CustomerList implements Initializable{
             alert.setTitle("Select Customer");
             alert.showAndWait();
         }
-        if (AppointmentDAO.checkForCustomerAppointmentLinks(c.getCustomerId()) != 0) {
+        if (AppointmentDAO.checkForCustomerAppointmentLinks(c.getCustomerId()) == true) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Customer cannot be deleted. Remove all appointments associated with this customer.");
             alert.setTitle("Error");
             alert.showAndWait();

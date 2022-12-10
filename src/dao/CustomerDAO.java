@@ -1,6 +1,5 @@
 package dao;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
@@ -14,9 +13,9 @@ import java.time.LocalTime;
 
 public class CustomerDAO {
 
-    public static int updateCustomer(Customer customer) {
+    public static void updateCustomer(Customer customer) {
         try {
-            String sql = "UPDATE CUSTOMERS SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?,Division_ID = ? WHERE Customer_ID = ?";
+            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
 
             PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
             preparedStatement.setString(1, customer.getCustomerName());
@@ -25,11 +24,16 @@ public class CustomerDAO {
             preparedStatement.setString(4, customer.getCustomerPhone());
             preparedStatement.setInt(5, customer.getDivisionId());
             preparedStatement.setInt(6, customer.getCustomerId());
-            return preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
+
+            if (preparedStatement.getUpdateCount() > 0) {
+                System.out.println("Total" + preparedStatement.getUpdateCount() + "rows updated.");
+            } else  {
+                System.out.println("No rows update.");
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return 0;
     }
 
     public static void createCustomer(Customer customer) {
@@ -67,7 +71,6 @@ public class CustomerDAO {
     }
 
     public static ObservableList<Customer> getAllCustomer() {
-
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
         try {
             String sql = "SELECT * FROM customers INNER JOIN first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID INNER JOIN countries ON first_level_divisions.COUNTRY_ID = countries.Country_ID ORDER BY Customer_ID ASC";
@@ -92,6 +95,7 @@ public class CustomerDAO {
     }
 
     public ObservableList<Appointment> getAppt(int custId) {
+        ObservableList<Appointment> apptList = FXCollections.observableArrayList();
         try {
             String sql = "SELECT * appointments WHERE Customer_ID = '" + custId + "'";
             PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
@@ -114,15 +118,13 @@ public class CustomerDAO {
                 int contactId = resultSet.getInt("Contact_ID");
 
                 Appointment a = new Appointment(id, title, description, location, type, date, start, end, customerId, userId, contactId);
-                ObservableList<Appointment> apptList = FXCollections.observableArrayList();
                 apptList.add(a);
-                return apptList;
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return null;
+        return apptList;
     }
 
 }

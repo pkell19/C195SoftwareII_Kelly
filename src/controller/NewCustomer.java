@@ -76,7 +76,6 @@ public class NewCustomer implements Initializable {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-
         SceneMovements.goToCustomerList(actionEvent);
     }
 

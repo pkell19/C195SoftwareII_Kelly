@@ -35,6 +35,7 @@
             <children>
                <ComboBox fx:id="updateCountryCombo" onAction="#onSelectCustomer" onMouseClicked="#updateCountrySelection" prefWidth="150.0" />
                <ComboBox fx:id="updateDivisionCombo" prefWidth="150.0" />
+               <TextField fx:id="customerId" editable="false" />
             </children>
          </HBox>
         </children>

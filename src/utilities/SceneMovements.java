@@ -27,7 +27,7 @@ public class SceneMovements {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(SceneMovements.class.getResource("/view/CustomerList.fxml")));
             Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1200, 600);
+            Scene scene = new Scene(root, 1000, 600);
             stage.setTitle("Customer List");
             stage.setScene(scene);
             stage.show();

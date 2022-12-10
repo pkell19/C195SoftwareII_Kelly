@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentList">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentList">
     <Label alignment="TOP_CENTER" layoutX="397.0" layoutY="14.0" text="Appointment List">
         <font>
           <Font name="Meiryo" size="24.0" />
@@ -31,19 +36,19 @@
             <Insets left="20.0" right="20.0" />
         </padding>
     </HBox>
-    <TableView fx:id="apptList" layoutX="13.0" layoutY="144.0" prefHeight="405.0" prefWidth="960.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
+    <TableView fx:id="apptListTableView" layoutX="13.0" layoutY="144.0" prefHeight="405.0" prefWidth="960.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="120.0">
       <columns>
           <TableColumn fx:id="apptIdCol" prefWidth="41.0" text="ID" />
-          <TableColumn fx:id="apptTitleCol" prefWidth="132.0" text="Title" />
-          <TableColumn fx:id="apptDescriptionCol" prefWidth="182.0" text="Description" />
-          <TableColumn fx:id="apptLocationCol" prefWidth="99.0" text="Location" />
-          <TableColumn fx:id="apptContactCol" prefWidth="86.0" text="Contact" />
-          <TableColumn fx:id="apptTypeCol" prefWidth="74.0" text="Type" />
-          <TableColumn fx:id="apptDateCol" prefWidth="61.0" text="Date" />
-          <TableColumn fx:id="apptStartTimeCol" prefWidth="78.0" text="Start Time" />
-          <TableColumn fx:id="apptEndTimeCol" prefWidth="70.0" text="End Time" />
-          <TableColumn fx:id="apptCustomerIdCol" prefWidth="86.0" text="Customer ID" />
-          <TableColumn fx:id="apptUserIdCol" prefWidth="57.0" text="User ID" />
+          <TableColumn fx:id="apptTitleCol" prefWidth="208.0" text="Title" />
+          <TableColumn fx:id="apptDescriptionCol" prefWidth="210.0" text="Description" />
+          <TableColumn fx:id="apptLocationCol" prefWidth="117.0" text="Location" />
+          <TableColumn fx:id="apptTypeCol" prefWidth="109.0" text="Type" />
+          <TableColumn fx:id="apptDateCol" prefWidth="78.0" text="Date" />
+          <TableColumn fx:id="apptStartTimeCol" prefWidth="101.0" text="Start Time" />
+          <TableColumn fx:id="apptEndTimeCol" prefWidth="78.0" text="End Time" />
+          <TableColumn fx:id="apptCustomerIdCol" prefWidth="87.0" text="Customer ID" />
+          <TableColumn fx:id="apptUserIdCol" prefWidth="52.0" text="User ID" />
+         <TableColumn fx:id="apptContactIdCol" prefWidth="75.0" text="Contact ID" />
       </columns>
     </TableView>
     <ButtonBar buttonMinWidth="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">

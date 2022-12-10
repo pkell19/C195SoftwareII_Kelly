@@ -16,7 +16,6 @@ public class AppointmentDAO {
 
     public static ObservableList<Appointment> getAllAppointments (){
         ObservableList<Appointment> alist = FXCollections.observableArrayList();
-
         try {
             String sql = "SELECT * FROM APPOINTMENTS";
             PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
@@ -38,7 +37,6 @@ public class AppointmentDAO {
 
                 Appointment a = new Appointment(apptId, title, description, location, type, date, start, end, customerId, userId, contactId);
                 alist.add(a);
-
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -120,6 +118,7 @@ public class AppointmentDAO {
     }
 
     public Appointment getAppt(int apptId) {
+        Appointment retrievedAppt = null;
         try {
             String sql = "SELECT * appointments WHERE Appointment_ID = '" + apptId + "'";
             PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
@@ -139,27 +138,29 @@ public class AppointmentDAO {
             int userId = resultSet.getInt("User_ID");
             int contactId = resultSet.getInt("Contact_ID");
 
-            return new Appointment(id, title, description, location, type, date, start, end, customerId, userId, contactId);
+            retrievedAppt = new Appointment(id, title, description, location, type, date, start, end, customerId, userId, contactId);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return null;
+        return retrievedAppt;
     }
 
-    public static int checkForCustomerAppointmentLinks (int customerId){
+    public static boolean checkForCustomerAppointmentLinks (int customerId){
+        int id = -1;
         try {
             String sql = "SELECT * FROM appointments WHERE Customer_ID = '" + customerId + "'";
             PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            int id = resultSet.getInt("Appointment_ID");
-            if (id == Integer.parseInt(null)) {
-                return 0;
+            while (resultSet.next()) {
+                id = resultSet.getInt("Appointment_ID");
             }
-            return id;
+            if (id == -1) {
+                return false;
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return 0;
+        return true;
     }
 }

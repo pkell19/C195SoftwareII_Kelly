@@ -28,6 +28,7 @@ public class UpdateCustomer implements Initializable {
     public TextField updatePhoneNumber;
     public ComboBox<Country> updateCountryCombo;
     public ComboBox<Division> updateDivisionCombo;
+    public TextField customerId;
 
     ObservableList<Country> countries = CountryDAO.getAllCountries();
     private static Customer passedCustomer;
@@ -45,6 +46,7 @@ public class UpdateCustomer implements Initializable {
         Division passedDivision = DivisionDAO.getDivision(passedCustomer.getDivisionId());
         updateCountryCombo.setValue(passedCountry); //DONE: Fix
         updateDivisionCombo.setValue(passedDivision);
+        customerId.setText(String.valueOf(passedCustomer.getCustomerId()));
     }
 
     public void updateCountrySelection(MouseEvent actionEvent) {
@@ -63,26 +65,34 @@ public class UpdateCustomer implements Initializable {
 
     public void onActSaveCustList(ActionEvent actionEvent) throws IOException {
         //TODO: Add save to customer list
-        String name = String.valueOf(updateCustomerName.getText());
-        String address = String.valueOf(updateAddress.getText());
-        String postalCode = String.valueOf(updatePostalCode.getText());
-        String phone = String.valueOf(updatePhoneNumber.getText());
-        int countryId = updateCountryCombo.getValue().getCountryId();
-        int divisionId = updateDivisionCombo.getValue().getDivisionId();
-        SceneMovements.goToCustomerList(actionEvent);
+        try {
+            String name = String.valueOf(updateCustomerName.getText());
+            String address = String.valueOf(updateAddress.getText());
+            String postalCode = String.valueOf(updatePostalCode.getText());
+            String phone = String.valueOf(updatePhoneNumber.getText());
+            int countryId = updateCountryCombo.getValue().getCountryId();
+            int divisionId = updateDivisionCombo.getValue().getDivisionId();
+            int custId = Integer.parseInt(customerId.getText());
 
         if (name.isEmpty() | address.isEmpty() | postalCode.isEmpty() | phone.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please complete every field!", ButtonType.OK);
             alert.setTitle("");
             alert.showAndWait();
+        } else {
+            //TODO: enter validation statements here
         }
-        //TODO: enter validation statements here
-        Customer updatedCustomer = new Customer(name, address, postalCode, phone, countryId, divisionId);
-        CustomerDAO.updateCustomer(updatedCustomer);
-        SceneMovements.goToCustomerList(actionEvent);
+        Customer c = new Customer(custId, name, address, postalCode, phone, countryId, divisionId);
+        CustomerDAO.updateCustomer(c);
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Customer information saved!", ButtonType.OK);
-        alert.showAndWait();
+        if (c == null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Customer information saved!", ButtonType.OK);
+            alert.showAndWait();
+        }
+        //DONE: Add coding to save to customer list
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        SceneMovements.goToCustomerList(actionEvent);
     }
 
         public void onActNoSaveCustList (ActionEvent actionEvent) throws IOException {
