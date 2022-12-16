@@ -40,15 +40,14 @@
       <columns>
           <TableColumn fx:id="apptIdCol" prefWidth="41.0" text="ID" />
           <TableColumn fx:id="apptTitleCol" prefWidth="208.0" text="Title" />
-          <TableColumn fx:id="apptDescriptionCol" prefWidth="210.0" text="Description" />
-          <TableColumn fx:id="apptLocationCol" prefWidth="117.0" text="Location" />
-          <TableColumn fx:id="apptTypeCol" prefWidth="109.0" text="Type" />
-          <TableColumn fx:id="apptDateCol" prefWidth="78.0" text="Date" />
-          <TableColumn fx:id="apptStartTimeCol" prefWidth="101.0" text="Start Time" />
-          <TableColumn fx:id="apptEndTimeCol" prefWidth="78.0" text="End Time" />
-          <TableColumn fx:id="apptCustomerIdCol" prefWidth="87.0" text="Customer ID" />
+          <TableColumn fx:id="apptDescriptionCol" prefWidth="233.0" text="Description" />
+          <TableColumn fx:id="apptLocationCol" prefWidth="149.0" text="Location" />
+          <TableColumn fx:id="apptTypeCol" prefWidth="124.0" text="Type" />
+          <TableColumn fx:id="apptStartTimeCol" prefWidth="75.0" text="Start Time" />
+          <TableColumn fx:id="apptEndTimeCol" prefWidth="69.0" text="End Time" />
+          <TableColumn fx:id="apptCustomerIdCol" prefWidth="78.0" text="Customer ID" />
           <TableColumn fx:id="apptUserIdCol" prefWidth="52.0" text="User ID" />
-         <TableColumn fx:id="apptContactIdCol" prefWidth="75.0" text="Contact ID" />
+         <TableColumn fx:id="apptContactIdCol" prefWidth="68.0" text="Contact ID" />
       </columns>
     </TableView>
     <ButtonBar buttonMinWidth="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">

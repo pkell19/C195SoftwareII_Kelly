@@ -1,20 +1,22 @@
 package controller;
 
-import dao.ContactDAO;
-import dao.CustomerDAO;
+import dao.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import model.Appointment;
-import model.Contact;
-import model.Customer;
+import model.*;
 import utilities.SceneMovements;
+import utilities.TimeConversion;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NewAppt implements Initializable {
@@ -31,38 +33,93 @@ public class NewAppt implements Initializable {
     public ComboBox newApptContactCombo;
     public ComboBox newApptTypeCombo;
 
+    ObservableList<String> types = AppointmentDAO.getApptTypes();
     ObservableList<Appointment> newAppointment = FXCollections.observableArrayList();
     ObservableList<Customer> customerList = CustomerDAO.getAllCustomer();
     ObservableList<Contact> contactList = ContactDAO.getallContacts();
-
-
+    ObservableList<User> userList = UserDAO.getAllUsers();
+    ObservableList<LocalTime> times = TimeConversion.timeList();
+    Customer customer = null;
+    User user = null;
+    Contact contact = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        newApptContactCombo.setItems(contactList);
-        newApptContactCombo.setVisibleRowCount(5);
-        newApptContactCombo.setPromptText("Select country.");
 
+        //Setting type combo box
+        newApptTypeCombo.setItems(types);
+        newApptTypeCombo.setVisibleRowCount(5);
+        newApptTypeCombo.setPromptText("Select type.");
+
+        //Setting start time combo box
+        newApptStartCombo.setItems(times);
+        newApptStartCombo.setVisibleRowCount(5);
+        newApptStartCombo.setPromptText("Enter start time.");
+
+        //Setting end time combo box
+        newApptEndCombo.setItems(times);
+        newApptEndCombo.setVisibleRowCount(5);
+        newApptEndCombo.setPromptText("Enter end time.");
+
+        //Setting customer combo box
         newApptCustomerCombo.setItems(customerList);
         newApptCustomerCombo.setVisibleRowCount(5);
         newApptCustomerCombo.setPromptText("Select customer.");
 
-        LocalTime start = LocalTime.of(0, 1);
-        LocalTime end = LocalTime.of(23, 59);
+        //Setting user combo box
+        newApptUserCombo.setItems(userList);
+        newApptUserCombo.setVisibleRowCount(5);
+        newApptUserCombo.setPromptText("Select user.");
 
-        /*while(start.isBefore(end.plusSeconds(1))){
-            newApptStartCombo.getItems().add(start);
-            start = start.plusMinutes(30);
-        }
-        newApptStartCombo.getSelectionModel().select(LocalTime.now());
-
-        while (end.isAfter(start.plusSeconds(1))) {
-            newApptEndCombo.getItems().add(end);
-            end = end.plusMinutes(30);
-        }
-        newApptEndCombo.getSelectionModel().select(LocalTime.now());*/
-
+        //Setting contact combo box
+        newApptContactCombo.setItems(contactList);
+        newApptContactCombo.setVisibleRowCount(5);
+        newApptContactCombo.setPromptText("Select contact.");
     }
+
+    public void saveNewAppt(ActionEvent actionEvent) throws IOException {
+
+        try {
+            String title = String.valueOf(newApptTitle.getText());
+            String description = String.valueOf(newApptDescription.getText());
+            String location = String.valueOf(newApptLocation.getText());
+            String type = String.valueOf(newApptTypeCombo.getValue());
+            LocalDate date = newApptDatePicker.getValue();
+            LocalTime start = (LocalTime) newApptStartCombo.getValue();
+            LocalTime end = (LocalTime) newApptEndCombo.getValue();
+            LocalDateTime startDate = LocalDateTime.of(date, start);
+            LocalDateTime endDate = LocalDateTime.of(date, end);
+            customer = (Customer) newApptCustomerCombo.getValue();
+            int customerId = customer.getCustomerId();
+            user = (User) newApptUserCombo.getValue();
+            int userId = user.getUserId();
+            contact = (Contact) newApptContactCombo.getValue();
+            int contactId = contact.getContactId();
+
+            if (title.isEmpty() | description.isEmpty() | location.isEmpty() | type.isEmpty() | date == null |
+                    start == null | end == null | customer == null | user == null | contact == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please complete every field!", ButtonType.OK);
+                alert.setTitle("");
+                alert.showAndWait();
+            } else {
+                //TODO: enter validation statements here
+            }
+            Appointment a = new Appointment(title, description, location, type, startDate, endDate, customerId, userId, contactId);
+            AppointmentDAO.createAppointment(a);
+            if (a == null){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Appointment saved!", ButtonType.OK);
+                alert.showAndWait();
+            }
+            //DONE: Add coding to save to customer list
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        SceneMovements.goToApptList(actionEvent);
+    }
+
+    public void cancelNewAppt(ActionEvent actionEvent) {
+    }
+
 
     public void onActionToMainMenu(ActionEvent actionEvent) throws IOException {
         SceneMovements.goToMainMenu(actionEvent);
@@ -78,12 +135,6 @@ public class NewAppt implements Initializable {
 
     public void onActionToReport(ActionEvent actionEvent) throws IOException {
         SceneMovements.goToReportPage(actionEvent);
-    }
-
-    public void saveNewAppt(ActionEvent actionEvent) {
-    }
-
-    public void cancelNewAppt(ActionEvent actionEvent) {
     }
 
 

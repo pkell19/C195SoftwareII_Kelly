@@ -32,24 +32,8 @@ public class Country {
         return country;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public LocalDateTime getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
     @Override
-    public String toString() {
-        return (country + " (" + countryId + ")");
+    public String toString(){
+        return (country);
     }
 }

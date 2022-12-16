@@ -1,20 +1,21 @@
 package controller;
 
 import dao.AppointmentDAO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Appointment;
 import utilities.SceneMovements;
+import utilities.TimeConversion;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AppointmentList implements Initializable {
@@ -23,26 +24,26 @@ public class AppointmentList implements Initializable {
     public TableColumn <Appointment, String> apptDescriptionCol;
     public TableColumn <Appointment, String> apptLocationCol;
     public TableColumn <Appointment, String> apptTypeCol;
-    public TableColumn <Appointment, LocalDate> apptDateCol;
-    public TableColumn <Appointment, LocalTime> apptStartTimeCol;
-    public TableColumn <Appointment, LocalTime> apptEndTimeCol;
+    public TableColumn <Appointment, LocalDateTime> apptStartTimeCol;
+    public TableColumn <Appointment, LocalDateTime> apptEndTimeCol;
     public TableColumn <Appointment, Integer> apptCustomerIdCol;
     public TableColumn <Appointment, Integer> apptUserIdCol;
     public TableColumn <Appointment, Integer> apptContactIdCol;
     public TableView <Appointment> apptListTableView;
+
     ObservableList<Appointment> appointmentList = AppointmentDAO.getAllAppointments();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         apptListTableView.setItems(appointmentList);
         apptIdCol.setCellValueFactory(new PropertyValueFactory<>("apptId"));
         apptTitleCol.setCellValueFactory(new PropertyValueFactory<>("apptTitle"));
         apptDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("apptDescription"));
         apptLocationCol.setCellValueFactory(new PropertyValueFactory<>("apptLocation"));
         apptTypeCol.setCellValueFactory(new PropertyValueFactory<>("apptType"));
-        apptDateCol.setCellValueFactory(new PropertyValueFactory<>("apptDate"));
-        apptStartTimeCol.setCellValueFactory(new PropertyValueFactory<>("apptStartTime"));
-        apptEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("apptEndTime"));
+        apptStartTimeCol.setCellValueFactory(new PropertyValueFactory<>("apptStartDateTime"));
+        apptEndTimeCol.setCellValueFactory(new PropertyValueFactory<>("apptEndDateTime"));
         apptCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("apptCustomerId"));
         apptUserIdCol.setCellValueFactory(new PropertyValueFactory<>("apptUserId"));
         apptContactIdCol.setCellValueFactory(new PropertyValueFactory<>("apptContactId"));

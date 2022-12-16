@@ -7,9 +7,7 @@ import model.Customer;
 import utilities.JDBC;
 import utilities.TimeConversion;
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class CustomerDAO {
 
@@ -108,16 +106,15 @@ public class CustomerDAO {
                 String description = resultSet.getString("Description");
                 String location = resultSet.getString("Location");
                 String type = resultSet.getString("Type");
-                Timestamp s = resultSet.getTimestamp("Start");
-                LocalTime start = s.toLocalDateTime().toLocalTime();
-                LocalDate date = s.toLocalDateTime().toLocalDate();
+                Timestamp s = resultSet.getTimestamp("Date");
+                LocalDateTime start = s.toLocalDateTime();
                 Timestamp e = resultSet.getTimestamp("End");
-                LocalTime end = e.toLocalDateTime().toLocalTime();
+                LocalDateTime end = e.toLocalDateTime();
                 int customerId = resultSet.getInt("Customer_ID");
                 int userId = resultSet.getInt("User_ID");
                 int contactId = resultSet.getInt("Contact_ID");
 
-                Appointment a = new Appointment(id, title, description, location, type, date, start, end, customerId, userId, contactId);
+                Appointment a = new Appointment(id, title, description, location, type, start, end, customerId, userId, contactId);
                 apptList.add(a);
             }
 
