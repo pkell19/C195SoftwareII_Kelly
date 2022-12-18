@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Appointment {
     private int apptId;
@@ -20,6 +21,9 @@ public class Appointment {
     private int apptCustomerId;
     private int apptUserId;
     private int apptContactId;
+
+    public static final LocalTime BUSINESS_OPENING = LocalTime.of(8, 0);
+    public static final LocalTime BUSINESS_CLOSING = LocalTime.of(22, 0);
 
     public static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 

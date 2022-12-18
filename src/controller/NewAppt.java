@@ -10,6 +10,7 @@ import model.*;
 import utilities.SceneMovements;
 import utilities.TimeConversion;
 
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class NewAppt implements Initializable {
@@ -87,8 +89,6 @@ public class NewAppt implements Initializable {
             LocalDate date = newApptDatePicker.getValue();
             LocalTime start = (LocalTime) newApptStartCombo.getValue();
             LocalTime end = (LocalTime) newApptEndCombo.getValue();
-            LocalDateTime startDate = LocalDateTime.of(date, start);
-            LocalDateTime endDate = LocalDateTime.of(date, end);
             customer = (Customer) newApptCustomerCombo.getValue();
             int customerId = customer.getCustomerId();
             user = (User) newApptUserCombo.getValue();
@@ -102,22 +102,43 @@ public class NewAppt implements Initializable {
                 alert.setTitle("");
                 alert.showAndWait();
             } else {
-                //TODO: enter validation statements here
-            }
-            Appointment a = new Appointment(title, description, location, type, startDate, endDate, customerId, userId, contactId);
-            AppointmentDAO.createAppointment(a);
-            if (a == null){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Appointment saved!", ButtonType.OK);
-                alert.showAndWait();
+                if (start.isAfter(end)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "The start time must come before the end time.", ButtonType.OK);
+                    alert.setTitle("");
+                    alert.showAndWait();
+                } else {
+                    if (start.isAfter(Appointment.BUSINESS_OPENING) && end.isBefore(Appointment.BUSINESS_CLOSING)) {
+                        LocalDateTime startDate = LocalDateTime.of(date, start);
+                        LocalDateTime endDate = LocalDateTime.of(date, end);
+                        Appointment a = new Appointment(title, description, location, type, startDate, endDate, customerId, userId, contactId);
+                        AppointmentDAO.createAppointment(a);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Appointment saved!", ButtonType.OK);
+                        Optional<ButtonType> choice = alert.showAndWait();
+                        if (choice.isPresent() && choice.get() == ButtonType.OK) {
+                            SceneMovements.goToApptList(actionEvent);
+                        }
+                    }
+                    else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "The appointment hours must be between 8:00 AM and 10:00 PM.", ButtonType.OK);
+                        alert.setTitle("");
+                        alert.showAndWait();
+                    }
+                    //TODO: enter validation statements here
+                }
             }
             //DONE: Add coding to save to customer list
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        SceneMovements.goToApptList(actionEvent);
     }
 
-    public void cancelNewAppt(ActionEvent actionEvent) {
+    public void cancelNewAppt(ActionEvent actionEvent) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit? Data will be lost.", ButtonType.YES,ButtonType.NO);
+        alert.setTitle("");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES) {
+            SceneMovements.goToApptList(actionEvent);
+        }
     }
 
 

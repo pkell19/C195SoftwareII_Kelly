@@ -40,7 +40,7 @@ public class UserDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int userId = resultSet.getInt("User_ID");
-                String userName = resultSet.getString("UserName");
+                String userName = resultSet.getString("User_Name");
                 user = new User(userId, userName);
             }
         } catch (SQLException throwables) {

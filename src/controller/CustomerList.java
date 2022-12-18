@@ -68,23 +68,23 @@ public class CustomerList implements Initializable{
             alert.setTitle("Select Customer");
             alert.showAndWait();
         }
-        if (AppointmentDAO.checkForCustomerAppointmentLinks(c.getCustomerId()) == true) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Customer cannot be deleted. Remove all appointments associated with this customer.");
-            alert.setTitle("Error");
-            alert.showAndWait();
-        } else {
-            Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + c.getCustomerName() + "?",ButtonType.YES,ButtonType.NO);
-            alert2.setTitle("Verify Deletion");
-            alert2.showAndWait().ifPresent(response -> {
-                        if (response == ButtonType.YES) {
-                            CustomerDAO.deleteCustomer(c.getCustomerId());
-                            customerListTable.setItems(CustomerDAO.getAllCustomer());
-                        }
-                    });
-
-        //DONE: Complete delete customer method
-        //TODO: add reference to lambda
-
+        else {
+            if (AppointmentDAO.checkForCustomerAppointmentLinks(c.getCustomerId())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Customer cannot be deleted. Remove all appointments associated with this customer.");
+                alert.setTitle("Error");
+                alert.showAndWait();
+            } else {
+                Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete " + c.getCustomerName() + "?", ButtonType.YES, ButtonType.NO);
+                alert2.setTitle("Verify Deletion");
+                alert2.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.YES) {
+                        CustomerDAO.deleteCustomer(c.getCustomerId());
+                        customerListTable.setItems(CustomerDAO.getAllCustomer());
+                    }
+                });
+                //DONE: Complete delete customer method
+                //TODO: add reference to lambda
+            }
         }
         //DONE: Refresh table after deletion
     }

@@ -30,6 +30,16 @@ public class Customer {
         this.divisionId = divisionId;
     }
 
+    public Customer(int customerId, String customerName, String customerAddress, String customerPostalCode , String customerPhone, int divisionId) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerAddress = customerAddress;
+        this.customerPostalCode = customerPostalCode;
+        this.customerPhone = customerPhone;
+        this.divisionId = divisionId;
+    }
+
+
     public int getCustomerId() {
         return customerId;
     }

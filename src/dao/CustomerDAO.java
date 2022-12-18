@@ -3,6 +3,7 @@ package dao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
+import model.Contact;
 import model.Customer;
 import utilities.JDBC;
 import utilities.TimeConversion;
@@ -64,8 +65,26 @@ public class CustomerDAO {
         //return 0;
     }
 
-    public Customer getCustomer(int customerId) {
-        return null;
+    public static Customer getCustomer(int id) {
+
+        Customer customer = null;
+        try {
+            String sql = "SELECT * FROM customers WHERE Customer_ID = '" + id + "'";
+            PreparedStatement preparedStatement = JDBC.connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int customerId = resultSet.getInt("Customer_ID");
+                String customerName = resultSet.getString("Customer_Name");
+                String address = resultSet.getString("Address");
+                String postalCode = resultSet.getString("Postal_Code");
+                String phone = resultSet.getString("Phone");
+                int divisionId = resultSet.getInt("Division_ID");
+                customer = new Customer(customerId, customerName, address, postalCode, phone, divisionId);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return customer;
     }
 
     public static ObservableList<Customer> getAllCustomer() {

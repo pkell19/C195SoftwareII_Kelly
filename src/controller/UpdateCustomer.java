@@ -19,6 +19,7 @@ import utilities.SceneMovements;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class UpdateCustomer implements Initializable {
@@ -80,24 +81,26 @@ public class UpdateCustomer implements Initializable {
             alert.showAndWait();
         } else {
             //TODO: enter validation statements here
-        }
-        Customer c = new Customer(custId, name, address, postalCode, phone, countryId, divisionId);
-        CustomerDAO.updateCustomer(c);
-
-        if (c == null){
+            Customer c = new Customer(custId, name, address, postalCode, phone, countryId, divisionId);
+            CustomerDAO.updateCustomer(c);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Customer information saved!", ButtonType.OK);
             alert.showAndWait();
+            SceneMovements.goToCustomerList(actionEvent);
         }
         //DONE: Add coding to save to customer list
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        SceneMovements.goToCustomerList(actionEvent);
     }
 
         public void onActNoSaveCustList (ActionEvent actionEvent) throws IOException {
-            //TODO: Add alert stating customer data not saved
-            SceneMovements.goToCustomerList(actionEvent);
+            //DONE: Add alert stating customer data not saved
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit? Data will be lost.", ButtonType.YES,ButtonType.NO);
+            alert.setTitle("");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.YES) {
+                SceneMovements.goToCustomerList(actionEvent);
+            }
         }
 
         public void onActionToCustomer (ActionEvent actionEvent) throws IOException {
